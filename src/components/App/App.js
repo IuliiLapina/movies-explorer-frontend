@@ -6,7 +6,7 @@ import Main from "../Main";
 import Footer from "../Footer"
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const loggedIn = false;
 
 
   return (

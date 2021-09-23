@@ -1,0 +1,6 @@
+.about-project__content {
+  padding-top: 70px;
+  padding-bottom: 110px;
+  display: flex;
+  justify-content: space-between;
+}
