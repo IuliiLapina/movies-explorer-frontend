@@ -3,5 +3,6 @@
   border-radius: 10px;
   min-height: 493px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  flex-direction: column;
 }

@@ -19,6 +19,9 @@
 @import url("./blocks/promo/promo.css");
 @import url("./blocks/promo/__bakground/promo__bakground.css");
 @import url("./blocks/promo/__title/promo__title.css");
+@import url("./blocks/promo/__column-links/promo__column-links.css");
+@import url("./blocks/promo/__list-item/promo__list-item.css");
+@import url("./blocks/promo/__link/promo__link.css");
 
 @import url("./blocks/footer/footer.css");
 @import url("./blocks/footer/__description/footer__description.css");
