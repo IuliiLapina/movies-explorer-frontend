@@ -1,13 +1,24 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url("./vendors/normalize.css");
+@import url("./vendors/fonts/Inter Web/inter.css");
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+@import url("./blocks/all-content-page/all-content-page.css");
+@import url("./blocks/page/page.css");
+
+@import url("./blocks/header/header.css");
+@import url("./blocks/header/__logo/header__logo.css");
+
+@import url("./blocks/header/__menu/header__menu.css");
+@import url("./blocks/header/__menu-link/header__menu-link.css");
+@import url("./blocks/header/__menu-link-item/header__menu-link-item.css");
+@import url("./blocks/header/__menu-link-item/_film/header__menu-link-item_film.css");
+@import url("./blocks/header/__menu-link-item/_save-film/header__menu-link-item_save-film.css");
+@import url("./blocks/header/__menu-link-item/_profile/header__menu-link-item_profile.css");
+@import url("./blocks/header/__menu-link-item/_login/header__menu-link-item_login.css");
+@import url("./blocks/header/__menu-link-item/_register/header__menu-link-item_register.css");
+
+@import url("./blocks/footer/footer.css");
+@import url("./blocks/footer/__description/footer__description.css");
+@import url("./blocks/footer/__info/footer__info.css");
+@import url("./blocks/footer/__copyright/footer__copyright.css");
+@import url("./blocks/footer/__column-links/footer__column-links.css");
+@import url("./blocks/footer/__link/footer__link.css");
