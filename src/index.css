@@ -16,6 +16,10 @@
 @import url("./blocks/header/__menu-link-item/_login/header__menu-link-item_login.css");
 @import url("./blocks/header/__menu-link-item/_register/header__menu-link-item_register.css");
 
+@import url("./blocks/promo/promo.css");
+@import url("./blocks/promo/__bakground/promo__bakground.css");
+@import url("./blocks/promo/__title/promo__title.css");
+
 @import url("./blocks/footer/footer.css");
 @import url("./blocks/footer/__description/footer__description.css");
 @import url("./blocks/footer/__info/footer__info.css");
