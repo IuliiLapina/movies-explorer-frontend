@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../../images/logo/logo.svg';
-import Navigation from '../Navigation'
+import Navigation from '../Navigation';
+
 function Header({ loggedIn }) {
   return (
     <header className="header">

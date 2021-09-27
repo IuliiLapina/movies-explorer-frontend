@@ -39,6 +39,15 @@
 @import url("./blocks/techs/__column/techs__column.css");
 @import url("./blocks/techs/__list-item/techs__list-item.css");
 
+@import url("./blocks/about-me/about-me.css");
+@import url("./blocks/about-me/__title/about-me__title.css");
+@import url("./blocks/about-me/__subtitle/about-me__subtitle.css");
+@import url("./blocks/about-me/__description/about-me__description.css");
+@import url("./blocks/about-me/__column-links/about-me__column-links.css");
+@import url("./blocks/about-me/__link/about-me__link.css");
+@import url("./blocks/about-me/__photo/about-me__photo.css");
+@import url("./blocks/about-me/__article/about-me__article.css");
+
 
 
 @import url("./blocks/footer/footer.css");
