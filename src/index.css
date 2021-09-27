@@ -18,13 +18,13 @@
 
 @import url("./blocks/promo/promo.css");
 @import url("./blocks/promo/__bakground/promo__bakground.css");
-@import url("./blocks/promo/__title/promo__title.css");
+@import url("./blocks/landing/__big-title/landing__big-title.css");
 @import url("./blocks/promo/__column-links/promo__column-links.css");
 @import url("./blocks/promo/__list-item/promo__list-item.css");
 @import url("./blocks/promo/__link/promo__link.css");
 
 @import url("./blocks/about-project/about-project.css");
-@import url("./blocks/landing-title/landing-title.css");
+@import url("./blocks/landing/__chapter/landing__chapter.css");
 @import url("./blocks/about-project/__content/about-project__content.css");
 @import url("./blocks/about-project/__title/about-project__title.css");
 @import url("./blocks/about-project/__description/about-project__description.css");
@@ -32,6 +32,14 @@
 @import url("./blocks/about-project/__duration-time/about-project__duration-time.css");
 @import url("./blocks/about-project/__duration-time/_green/about-project__duration-time_green.css");
 @import url("./blocks/about-project/__duration-subtitle/about-project__duration-subtitle.css");
+
+@import url("./blocks/techs/techs.css");
+@import url("./blocks/techs/__title/tech__title.css");
+@import url("./blocks/techs/__description/techs__description.css");
+@import url("./blocks/techs/__column/techs__column.css");
+@import url("./blocks/techs/__list-item/techs__list-item.css");
+
+
 
 @import url("./blocks/footer/footer.css");
 @import url("./blocks/footer/__description/footer__description.css");

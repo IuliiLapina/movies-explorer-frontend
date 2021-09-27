@@ -1,4 +1,4 @@
 .about-project__duration {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 0.75fr 3fr;
 }

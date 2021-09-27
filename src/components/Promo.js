@@ -5,7 +5,7 @@ function Promo() {
   return (
     <section className="promo">
       <div className="promo__bakground">
-        <h1 className="promo__title">Учебный проект студента факультета Веб-разработки.</h1>
+        <h1 className="landing__big-title">Учебный проект студента факультета Веб-разработки.</h1>
         <NavTab/>
       </div>
     </section>

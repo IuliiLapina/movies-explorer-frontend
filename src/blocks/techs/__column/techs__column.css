@@ -1,0 +1,8 @@
+.techs__column {
+  margin: 0 auto;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+  padding-right: 30px;
+}
