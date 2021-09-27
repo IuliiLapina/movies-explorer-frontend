@@ -1,0 +1,8 @@
+.portfolio__link {
+  line-height: 50px;
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: -0.04em;;
+  text-decoration: none;
+  color: black;
+}

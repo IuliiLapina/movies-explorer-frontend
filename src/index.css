@@ -48,6 +48,17 @@
 @import url("./blocks/about-me/__photo/about-me__photo.css");
 @import url("./blocks/about-me/__article/about-me__article.css");
 
+@import url("./blocks/portfolio/portfolio.css");
+@import url("./blocks/portfolio/__title/portfolio__title.css");
+@import url("./blocks/portfolio/__links/portfolio__links.css");
+@import url("./blocks/portfolio/__link/portfolio__link.css");
+@import url("./blocks/portfolio/__list-item/portfolio__list-item.css");
+
+
+
+
+
+
 
 
 @import url("./blocks/footer/footer.css");

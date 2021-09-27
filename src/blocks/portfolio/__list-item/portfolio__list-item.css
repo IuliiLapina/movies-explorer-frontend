@@ -1,0 +1,8 @@
+.portfolio__list-item {
+  padding-bottom: 18px;
+  margin-bottom: 21px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 5px;
+  border-bottom: 1px solid #E8E8E8;
+}
