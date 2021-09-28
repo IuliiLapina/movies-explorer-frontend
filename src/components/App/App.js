@@ -2,19 +2,19 @@ import React from 'react';
 //import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
 import Header from "../Header/Header";
-import Main from "../Main";
+//import Main from "../Main";
 import Footer from "../Footer"
+import Movies from "../Movies"
 
 function App() {
-  const loggedIn = false;
-
+  const loggedIn = true;
 
   return (
     <div className ="page">
       <Header
         loggedIn = {loggedIn}
       />
-      <Main/>
+      <Movies/>
       <Footer/>
     </div>
   );

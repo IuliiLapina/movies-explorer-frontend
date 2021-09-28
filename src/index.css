@@ -54,12 +54,13 @@
 @import url("./blocks/portfolio/__link/portfolio__link.css");
 @import url("./blocks/portfolio/__list-item/portfolio__list-item.css");
 
-
-
-
-
-
-
+@import url("./blocks/search/search.css");
+@import url("./blocks/search/__form/search__form.css");
+@import url("./blocks/search/__input/search__input.css");
+@import url("./blocks/search/__button/search__button.css");
+@import url("./blocks/checkbox/checkbox.css");
+@import url("./blocks/checkbox/__input/checkbox__input.css");
+@import url("./blocks/checkbox/__container/checkbox__container.css");
 
 @import url("./blocks/footer/footer.css");
 @import url("./blocks/footer/__description/footer__description.css");

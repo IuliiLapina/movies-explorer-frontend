@@ -1,0 +1,7 @@
+.search__form {
+  display: flex;
+  background-color: #F9F9F9;
+  border-radius: 9px;
+  padding: 16px 25px;
+  align-items: center;
+}
