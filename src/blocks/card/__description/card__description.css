@@ -1,0 +1,7 @@
+.card__description {
+  display: grid;
+  justify-content: space-between;
+  grid-template-areas:
+        "title like-button"
+        "duration like-button";
+}

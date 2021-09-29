@@ -1,7 +1,6 @@
 .footer__description {
-  margin: 0;
+  margin: 0 auto;
   padding-bottom: 18px;
-  padding-right: 70px;
   text-align: center;
   color: #A0A0A0;
   border-bottom: 1px solid #E8E8E8;
