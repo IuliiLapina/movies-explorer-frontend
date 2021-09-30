@@ -2,6 +2,6 @@
   display: grid;
   justify-content: space-between;
   grid-template-areas:
-        "title like-button"
-        "duration like-button";
+        "title button"
+        "duration button";
 }

@@ -8,7 +8,7 @@
   background-position-y: 15px;
   background-repeat: no-repeat;
   cursor: pointer;
-  grid-area: like-button;
+  grid-area: button;
 }
 
 .card__like-btn:hover {
