@@ -1,4 +1,6 @@
 .form-auth__text-container {
   display: flex;
-  padding: 16px 0 0 90px;
+  padding-top: 16px;
+  width: 396px;
+  justify-content: center;
 }

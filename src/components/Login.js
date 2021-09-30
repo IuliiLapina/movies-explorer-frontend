@@ -2,24 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo/logo.svg';
 
-function Register() {
+function Login () {
   return (
     <div className="form-auth">
       <img className="form-auth__logo" src={logo} alt="Логотип 'Movies'" />
       <div className="popup__container">
-        <h2 className="popup__title">Добро пожаловать!</h2>
+        <h2 className="popup__title">Рады видеть!</h2>
         <form className="popup__form" name='form-register'>
-          <label className="popup__input-heading" for="name-input">Имя</label>
-          <input
-            id="name-input"
-            className="popup__input popup__input-text popup__input-text_type_link-name"
-            type="text"
-            placeholder="Виталий"
-            name="name"
-            required
-          />
-          <span className="popup__input-error name-input-error"></span>
-
           <label className="popup__input-heading" for="email-input">Email</label>
           <input
             id="email-input"
@@ -43,17 +32,17 @@ function Register() {
 
           <input
             type="submit"
-            className="popup__button"
-            value="Зарегистрироваться"
+            className="popup__button popup__button_login"
+            value="Войти"
           />
         </form>
       </div>
       <div className="form-auth__text-container">
-        <p className="form-auth__text">Уже зарегистрированы?</p>
-        <Link className="form-auth__link" to="/">Войти</Link>
+        <p className="form-auth__text">Ещё не зарегистрированы?</p>
+        <Link className="form-auth__link" to="/">Регистрация</Link>
       </div>
     </div>
   );
 }
 
-export default Register;
+export default Login;
