@@ -1,0 +1,15 @@
+.profile__button {
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 413px;
+  padding-top: 204px;
+}
+
+.profile__button:hover {
+  opacity: 0.7;
+}

@@ -1,8 +1,7 @@
 .form-auth{
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin: 0 auto;
-  width: 31%;
+  align-items: center;
+  min-width: 396px;
   padding-top: 70px;
 }

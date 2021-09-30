@@ -108,6 +108,21 @@
 @import url("./blocks/form-auth/__text/form-auth__text.css");
 @import url("./blocks/form-auth/__link/form-auth__link.css");
 
+@import url("./blocks/profile/profile.css");
+@import url("./blocks/profile/__button/profile__button.css");
+@import url("./blocks/profile/__link/profile__link.css");
+@import url("./blocks/popup/__form/_profile/popup__form_profile.css");
+@import url("./blocks/popup/__container/_profile/popup__container_profile.css");
+@import url("./blocks/popup/__title/_profile/popup__title_profile.css");
+@import url("./blocks/profile/__input-container/profile__input-container.css");
+@import url("./blocks/profile/__input/profile__input.css");
+@import url("./blocks/profile/__input-heading/profile__input-heading.css");
+
+
+
+
+
+
 
 
 

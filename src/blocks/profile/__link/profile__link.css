@@ -1,0 +1,15 @@
+.profile__link {
+  color: #FF3055;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  padding-top: 16px;
+  margin: 0 auto;
+  padding-left: 3px;
+}
+
+.profile__link:hover {
+  opacity: 0.7;
+}

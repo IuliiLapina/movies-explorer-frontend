@@ -9,7 +9,7 @@ function Login () {
       <div className="popup__container">
         <h2 className="popup__title">Рады видеть!</h2>
         <form className="popup__form" name='form-register'>
-          <label className="popup__input-heading" for="email-input">Email</label>
+          <label className="popup__input-heading" for="email-input">E-mail</label>
           <input
             id="email-input"
             className="popup__input popup__input-text popup__input-text_type_link-email"

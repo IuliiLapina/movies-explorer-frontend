@@ -1,21 +1,26 @@
 import React from 'react';
 //import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
-//import Header from "../Header/Header";
+import Header from "../Header/Header";
 //import Main from "../Main";
 //import Footer from "../Footer";
 //import Movies from "../Movies";
 //import SavedMovies from "../SavedMovies";
 //import PageNotFound from "../PageNotFound";
-import Register from "../Register";
-import Login from "../Login";
+//import Register from "../Register";
+//import Login from "../Login";
+import Profile from "../Profile";
+
 
 function App() {
   const loggedIn = false;
 
   return (
     <div className ="page">
-      <Register/>
+      <Header
+        loggedIn = {loggedIn}
+      />
+      <Profile/>
     </div>
   );
 }

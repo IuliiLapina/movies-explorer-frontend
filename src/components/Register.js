@@ -20,7 +20,7 @@ function Register() {
           />
           <span className="popup__input-error name-input-error"></span>
 
-          <label className="popup__input-heading" for="email-input">Email</label>
+          <label className="popup__input-heading" for="email-input">E-mail</label>
           <input
             id="email-input"
             className="popup__input popup__input-text popup__input-text_type_link-email"
