@@ -10,6 +10,8 @@ import Header from "../Header/Header";
 //import Register from "../Register";
 //import Login from "../Login";
 import Profile from "../Profile";
+import InfoTooltip from "../InfoTooltip";
+
 
 
 function App() {
@@ -21,6 +23,7 @@ function App() {
         loggedIn = {loggedIn}
       />
       <Profile/>
+      <InfoTooltip/>
     </div>
   );
 }

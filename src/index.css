@@ -118,6 +118,15 @@
 @import url("./blocks/profile/__input/profile__input.css");
 @import url("./blocks/profile/__input-heading/profile__input-heading.css");
 
+@import url("./blocks/popup/__close-btn/popup__close-btn.css");
+@import url("./blocks/popup/_opened/popup_opened.css");
+@import url("./blocks/popup/__container/_info/popup__container_info.css");
+@import url("./blocks/popup/__subtitle-info/popup__subtitle-info.css");
+
+
+
+
+
 
 
 

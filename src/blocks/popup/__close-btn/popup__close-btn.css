@@ -1,0 +1,19 @@
+.popup__close-btn {
+  background-image: url(../../../images/icon/delete.svg);
+  background-size: 26px;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 26px;
+  height: 26px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  position: absolute;
+  top: -45px;
+  right: 5px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.pop-up__close-btn:hover {
+  opacity: 0.7;
+}
