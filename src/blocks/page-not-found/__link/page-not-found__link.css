@@ -10,3 +10,10 @@
 .page-not-found__link:hover {
   opacity: 0.7;
 }
+
+@media screen and (max-width: 630px) {
+  .page-not-found__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

@@ -8,3 +8,28 @@
   padding-top: 25px;
   width: 41%;
 }
+
+@media screen and (max-width: 940px) {
+  .techs__description {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .techs__description {
+    font-size: 12px;
+    line-height: 18px;
+    width: 60%;
+    padding-top: 21px;
+    letter-spacing: -0.039em;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .techs__description {
+    font-size: 11px;
+    line-height: 16px;
+    width: 90%;
+    padding-top: 24px;
+  }
+}

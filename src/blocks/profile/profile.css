@@ -4,3 +4,17 @@
   padding-top: 30px;
   padding-right: 3px;
 }
+
+@media screen and (max-width: 900px) {
+  .profile {
+    padding-top: 191px;
+    padding-bottom: 266px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .profile {
+    padding-top: 20px;
+    padding-bottom: 0px;
+  }
+}

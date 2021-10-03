@@ -4,3 +4,9 @@
   padding-bottom: 14px;
   padding-right: 358px;
 }
+
+@media screen and (max-width: 430px) {
+  .form-auth__logo{
+    padding-right: 0px;
+  }
+}

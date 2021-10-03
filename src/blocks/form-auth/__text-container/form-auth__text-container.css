@@ -4,3 +4,10 @@
   width: 396px;
   justify-content: center;
 }
+
+@media screen and (max-width: 430px) {
+  .form-auth__text-container {
+    padding-top: 13px;
+    width: 260px;
+  }
+}

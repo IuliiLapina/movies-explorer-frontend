@@ -8,3 +8,9 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 370px) {
+  .cards__more-btn {
+    padding: 9px 107px 10px;
+  }
+}

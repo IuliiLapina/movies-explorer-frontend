@@ -5,3 +5,16 @@
   padding: 16px 25px;
   align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+  .search__form {
+    padding: 16px 15px 16px 25px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .search__form {
+    padding: 18px 0px;
+    position: relative;
+  }
+}

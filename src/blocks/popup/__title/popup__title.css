@@ -5,3 +5,10 @@
   margin: 0;
   padding-top: 25px;
 }
+
+@media screen and (max-width: 430px) {
+  .popup__title {
+    text-align: center;
+    padding-top: 36px;
+  }
+}

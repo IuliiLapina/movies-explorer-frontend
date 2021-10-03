@@ -10,8 +10,7 @@
 @import url("./blocks/header/__menu/header__menu.css");
 @import url("./blocks/header/__menu-link/header__menu-link.css");
 @import url("./blocks/header/__menu-link-item/header__menu-link-item.css");
-@import url("./blocks/header/__menu-link-item/_film/header__menu-link-item_film.css");
-@import url("./blocks/header/__menu-link-item/_save-film/header__menu-link-item_save-film.css");
+@import url("./blocks/header/__menu-link-item/_active/header__menu-link-item_active.css");
 @import url("./blocks/header/__menu-link-item/_profile/header__menu-link-item_profile.css");
 @import url("./blocks/header/__menu-link-item/_login/header__menu-link-item_login.css");
 @import url("./blocks/header/__menu-link-item/_register/header__menu-link-item_register.css");
@@ -26,6 +25,7 @@
 @import url("./blocks/about-project/about-project.css");
 @import url("./blocks/landing/__chapter/landing__chapter.css");
 @import url("./blocks/about-project/__content/about-project__content.css");
+@import url("./blocks/about-project/__article/about-project__article.css");
 @import url("./blocks/about-project/__title/about-project__title.css");
 @import url("./blocks/about-project/__description/about-project__description.css");
 @import url("./blocks/about-project/__duration/about-project__duration.css");
@@ -53,6 +53,7 @@
 @import url("./blocks/portfolio/__links/portfolio__links.css");
 @import url("./blocks/portfolio/__link/portfolio__link.css");
 @import url("./blocks/portfolio/__list-item/portfolio__list-item.css");
+@import url("./blocks/portfolio/__image-link/portfolio__image-link.css");
 
 @import url("./blocks/search/search.css");
 @import url("./blocks/search/__form/search__form.css");

@@ -6,3 +6,15 @@
   justify-content: space-between;
   flex-direction: column;
 }
+
+@media screen and (max-width: 768px) {
+  .promo__bakground {
+    min-height: 834px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .promo__bakground {
+    min-height: 586px;
+  }
+}

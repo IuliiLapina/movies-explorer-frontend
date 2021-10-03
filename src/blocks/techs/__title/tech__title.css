@@ -2,8 +2,22 @@
  font-size: 50px;
  line-height: 59px;
  margin: 0 auto;
- letter-spacing: -2px;
+ letter-spacing: -0.04em;
  text-align: center;
  font-weight: 400;
  padding-top: 90px;
+}
+
+@media screen and (max-width: 768px) {
+  .tech__title {
+    padding-top: 80px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .tech__title {
+    padding-top: 60px;
+    font-size: 30px;
+    line-height: 36px;
+  }
 }

@@ -39,7 +39,7 @@ function Register() {
             name="password"
             required
           />
-          <span className="popup__input-error password-input-error popup__input-error_type_active"></span>
+          <span className="popup__input-error password-input-error popup__input-error_type_active">Что-то пошло не так...</span>
 
           <input
             type="submit"

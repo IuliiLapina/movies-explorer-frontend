@@ -6,3 +6,9 @@
   color: black;
   padding-right: 20px;
 }
+
+@media screen and (max-width: 320px) {
+  .about-me__link {
+    padding-right: 26px;
+  }
+}

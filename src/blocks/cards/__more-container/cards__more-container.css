@@ -4,3 +4,17 @@
   padding-top: 60px;
   padding-bottom: 81px;
 }
+
+@media screen and (max-width: 1230px) {
+  .cards__more-container {
+    padding-top: 81px;
+    padding-bottom: 76px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .cards__more-container {
+    padding-top: 76px;
+    padding-bottom: 87px;
+  }
+}

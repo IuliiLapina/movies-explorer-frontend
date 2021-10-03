@@ -2,3 +2,15 @@
   display: grid;
   grid-template-columns: 0.75fr 3fr;
 }
+
+@media screen and (max-width: 768px) {
+  .about-project__duration {
+    grid-template-columns: 0.8fr 3fr;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .about-project__duration {
+    grid-template-columns: 1.6fr 3fr;
+  }
+}

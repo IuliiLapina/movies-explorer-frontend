@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 
 function Navigation ({ loggedIn }) {
   return (
-        <nav className="header__menu">
+        <div className="header__menu">
+
+
           <ul className="header__menu-link">
             {loggedIn ? (
                 <>
-                  <li className="header__list-item"><Link to="/" className="header__menu-link-item header__menu-link-item_film">Фильмы</Link></li>
-                  <li className="header__list-item"><Link to="/" className="header__menu-link-item header__menu-link-item_save-film">Сохранённые фильмы</Link></li>
+                  <li className="header__list-item"><Link to="/" className="header__menu-link-item header__menu-link-item_active">Фильмы</Link></li>
+                  <li className="header__list-item"><Link to="/" className="header__menu-link-item">Сохранённые фильмы</Link></li>
                   <li className="header__list-item"><Link to="/" className="header__menu-link-item header__menu-link-item_profile">Аккаунт</Link></li>
                 </>
               ) : (
@@ -18,8 +20,15 @@ function Navigation ({ loggedIn }) {
                 </>
               )}
           </ul>
-        </nav>
+        </div>
   );
 }
 
 export default Navigation;
+
+/*
+          <input id="menu__toggle" type="checkbox" />
+          <label class="menu__btn" for="menu__toggle">
+            <span></span>
+          </label>
+*/

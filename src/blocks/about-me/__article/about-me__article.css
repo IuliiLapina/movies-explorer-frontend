@@ -1,3 +1,11 @@
 .about-me__article {
   display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 630px) {
+  .about-me__article {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 }

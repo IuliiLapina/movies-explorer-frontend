@@ -12,3 +12,41 @@
   font-weight: 400;
   width: 75%;
 }
+
+@media screen and (max-width: 1000px) {
+  .search__input {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .search__input {
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .search__input {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .search__input {
+    font-size: 14px;
+    width: 86%;
+
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .search__input {
+    padding: 0px 0px 2px 19px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .search__input {
+    width: 76%;
+  }
+}

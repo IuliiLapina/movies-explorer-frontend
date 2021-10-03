@@ -11,3 +11,12 @@
   align-items: center;
   margin-right: 10px;
 }
+
+@media screen and (max-width: 790px) {
+  .techs__list-item {
+    font-size: 12px;
+    line-height: 15px;
+    min-width: 84px;
+    min-height: 57px;
+  }
+}

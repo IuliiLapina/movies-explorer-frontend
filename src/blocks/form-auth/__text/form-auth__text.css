@@ -6,3 +6,10 @@
   margin: 0;
   padding-right: 6px;
 }
+
+@media screen and (max-width: 430px) {
+  .form-auth__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

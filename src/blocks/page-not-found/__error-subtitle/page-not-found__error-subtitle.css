@@ -5,3 +5,11 @@
   line-height: 19px;
   padding-bottom: 184px;
 }
+
+@media screen and (max-width: 630px) {
+  .page-not-found__error-subtitle {
+    font-size: 12px;
+    line-height: 15px;
+    padding-bottom: 284px;
+  }
+}

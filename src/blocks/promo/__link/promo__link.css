@@ -6,3 +6,9 @@
   font-weight: 500;
   margin: 0;
 }
+
+@media screen and (max-width: 320px) {
+  .promo__link {
+    font-size: 10px;
+  }
+}

@@ -14,3 +14,9 @@
 .card__like-btn:hover {
   opacity: 0.7;
 }
+
+@media screen and (max-width: 320px) {
+  .card__like-btn {
+    background-position-x: 28px;
+  }
+}

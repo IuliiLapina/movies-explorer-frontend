@@ -4,3 +4,11 @@
   line-height: 16px;
   padding-right: 28px;
 }
+
+@media screen and (max-width: 430px) {
+  .header__menu-link-item_register {
+    line-height: 16px;
+    font-size: 10px;
+    padding-right: 15px;
+  }
+}

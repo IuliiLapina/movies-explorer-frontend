@@ -1,3 +1,39 @@
 .content-cards {
   padding: 69px 70px 0;
 }
+
+@media screen and (max-width: 1270px) {
+  .content-cards {
+    padding: 69px 60px 0;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .content-cards {
+    padding: 69px 50px 0;
+  }
+}
+
+@media screen and (max-width: 1230px) {
+  .content-cards {
+    padding: 69px 40px 0;
+  }
+}
+
+@media screen and (max-width: 1210px) {
+  .content-cards {
+    padding: 69px 30px 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .content-cards {
+    padding: 109px 30px 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .content-cards {
+    padding: 110px 10px 0;
+  }
+}

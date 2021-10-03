@@ -9,3 +9,16 @@
   overflow: hidden;
   grid-area: title;
 }
+
+@media screen and (max-width: 768px) {
+  .card__title {
+    padding: 11px 0px 0px 14px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card__title {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

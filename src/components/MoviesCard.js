@@ -20,6 +20,30 @@ function MoviesCard () {
         <button className="card__delete-btn" type="button"></button>
       </div>
     </li>
+    <li className="card card_saved">
+      <img className="card__image" src={movie} alt=''/>
+      <div className="card__description">
+        <h2 className="card__title">33 слова о дизайне</h2>
+        <p className="card__duration"> 1ч 47м</p>
+        <button className="card__delete-btn" type="button"></button>
+      </div>
+    </li>
+    <li className="card card_saved">
+      <img className="card__image" src={movie} alt=''/>
+      <div className="card__description">
+        <h2 className="card__title">33 слова о дизайне</h2>
+        <p className="card__duration"> 1ч 47м</p>
+        <button className="card__like-btn" type="button"></button>
+      </div>
+    </li>
+    <li className="card card_saved">
+      <img className="card__image" src={movie} alt=''/>
+      <div className="card__description">
+        <h2 className="card__title">33 слова о дизайне</h2>
+        <p className="card__duration"> 1ч 47м</p>
+        <button className="card__like-btn" type="button"></button>
+      </div>
+    </li>
   </>
   );
 }
