@@ -3,21 +3,17 @@
   flex-direction: column;
   align-items: center;
   min-width: 396px;
-  padding-top: 70px;
 }
 
 @media screen and (max-width: 900px) {
   .form-auth{
-    padding-top: 232px;
     padding-bottom: 60px;
-
   }
 }
 
 @media screen and (max-width: 430px) {
   .form-auth{
     min-width: 260px;
-    padding-top: 56px;
     padding-bottom: 30px;
     margin: 0 auto;
   }

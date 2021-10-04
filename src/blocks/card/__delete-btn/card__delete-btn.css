@@ -11,3 +11,7 @@
   grid-area: button;
   display: none;
 }
+
+.card__delete-btn:hover {
+  opacity: 0.8;
+}

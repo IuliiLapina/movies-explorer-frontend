@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function AboutMe() {
   return (
-    <section className="about-me">
+    <section className="about-me" id="about-me">
       <h2 className="landing__chapter">Студент</h2>
       <div className="about-me__article">
         <div className="about-me__text">
@@ -19,8 +19,8 @@ function AboutMe() {
           </p>
 
           <ul className="about-me__column-links">
-            <li className="about-me__list-item"><Link to="/" className="about-me__link">Facebook</Link></li>
-            <li className="about-me__list-item"><Link to="/" className="about-me__link">Github</Link></li>
+            <li className="about-me__list-item"><Link to="https://ru-ru.facebook.com/" target="_blank" className="about-me__link">Facebook</Link></li>
+            <li className="about-me__list-item"><Link to="https://github.com/IuliiLapina" target="_blank" className="about-me__link">Github</Link></li>
           </ul>
         </div>
         <img className="about-me__photo" src={photo} alt="Фото фронтенд-разработчика"/>

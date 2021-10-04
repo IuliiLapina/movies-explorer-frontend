@@ -10,7 +10,7 @@ function Movies () {
     <main className="content">
       <SearchForm/>
       <MoviesCardList
-      cards={cardData}/>
+      cardData={cardData}/>
     </main>
   );
 }

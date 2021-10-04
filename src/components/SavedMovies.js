@@ -9,7 +9,7 @@ function Movies () {
     <main className="content">
       <SearchForm/>
       <MoviesCardList
-      cards={saveCardData}/>
+      cardData={saveCardData}/>
     </main>
   );
 }

@@ -1,47 +1,18 @@
 import React from "react";
-import movie from "../images/card.png";
+import { useLocation } from 'react-router-dom';
 
-function MoviesCard () {
+function MoviesCard ({card}) {
+  const location = useLocation();
+  const classNameCardBtn = `${location.pathname === `/movies` ? `card__like-btn` : `card__delete-btn`}`;
+
   return (
     <>
     <li className="card card_saved">
-      <img className="card__image" src={movie} alt=''/>
+      <img className="card__image" src={card.link} alt={card.title}/>
       <div className="card__description">
-        <h2 className="card__title">33 слова о дизайне</h2>
-        <p className="card__duration"> 1ч 47м</p>
-        <button className="card__like-btn" type="button"></button>
-      </div>
-    </li>
-    <li className="card card_saved">
-      <img className="card__image" src={movie} alt=''/>
-      <div className="card__description">
-        <h2 className="card__title">33 слова о дизайне</h2>
-        <p className="card__duration"> 1ч 47м</p>
-        <button className="card__delete-btn" type="button"></button>
-      </div>
-    </li>
-    <li className="card card_saved">
-      <img className="card__image" src={movie} alt=''/>
-      <div className="card__description">
-        <h2 className="card__title">33 слова о дизайне</h2>
-        <p className="card__duration"> 1ч 47м</p>
-        <button className="card__delete-btn" type="button"></button>
-      </div>
-    </li>
-    <li className="card card_saved">
-      <img className="card__image" src={movie} alt=''/>
-      <div className="card__description">
-        <h2 className="card__title">33 слова о дизайне</h2>
-        <p className="card__duration"> 1ч 47м</p>
-        <button className="card__like-btn" type="button"></button>
-      </div>
-    </li>
-    <li className="card card_saved">
-      <img className="card__image" src={movie} alt=''/>
-      <div className="card__description">
-        <h2 className="card__title">33 слова о дизайне</h2>
-        <p className="card__duration"> 1ч 47м</p>
-        <button className="card__like-btn" type="button"></button>
+        <h2 className="card__title">{card.title}</h2>
+        <p className="card__duration">{card.duration}</p>
+        <button className={classNameCardBtn} type="button"></button>
       </div>
     </li>
   </>

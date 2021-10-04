@@ -14,6 +14,10 @@
 @import url("./blocks/header/__menu-link-item/_profile/header__menu-link-item_profile.css");
 @import url("./blocks/header/__menu-link-item/_login/header__menu-link-item_login.css");
 @import url("./blocks/header/__menu-link-item/_register/header__menu-link-item_register.css");
+@import url("./blocks/header/__menu-link/_films/header__menu-link_films.css");
+@import url("./blocks/header/__list-item/header__list-item.css");
+@import url("./blocks/header/__menu-btn/header__menu-btn.css");
+@import url("./blocks/header/__menu-toggle/header__menu-toggle.css");
 
 @import url("./blocks/promo/promo.css");
 @import url("./blocks/promo/__bakground/promo__bakground.css");

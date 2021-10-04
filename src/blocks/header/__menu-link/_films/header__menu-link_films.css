@@ -1,0 +1,13 @@
+.header__menu-link_films {
+  display: flex;
+  list-style: none;
+  padding: 0px 33px 0 0;
+}
+
+@media screen and (max-width: 768px) {
+  .header__menu-link_films {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+}

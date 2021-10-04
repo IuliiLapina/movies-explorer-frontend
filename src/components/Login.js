@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../images/logo/logo.svg';
 
-function Login () {
+function Login ({title, buttonText}) {
   return (
     <div className="form-auth">
-      <img className="form-auth__logo" src={logo} alt="Логотип 'Movies'" />
       <div className="popup__container">
-        <h2 className="popup__title">Рады видеть!</h2>
+        <h2 className="popup__title">{title}</h2>
         <form className="popup__form" name='form-register'>
-          <label className="popup__input-heading" for="email-input">E-mail</label>
+          <label className="popup__input-heading" htmlFor="email-input">E-mail</label>
           <input
             id="email-input"
             className="popup__input popup__input-text popup__input-text_type_link-email"
@@ -20,7 +18,7 @@ function Login () {
           />
           <span className="popup__input-error email-input-error"></span>
 
-          <label className="popup__input-heading" for="password-input">Пароль</label>
+          <label className="popup__input-heading" htmlFor="password-input">Пароль</label>
           <input
             id="password-input"
             className="popup__input popup__input-text popup__input-text_type_link-password"
@@ -33,13 +31,13 @@ function Login () {
           <input
             type="submit"
             className="popup__button popup__button_login"
-            value="Войти"
+            value={buttonText}
           />
         </form>
       </div>
       <div className="form-auth__text-container">
         <p className="form-auth__text">Ещё не зарегистрированы?</p>
-        <Link className="form-auth__link" to="/">Регистрация</Link>
+        <Link className="form-auth__link" to="/signup">Регистрация</Link>
       </div>
     </div>
   );

@@ -1,13 +1,17 @@
 .portfolio__link {
   line-height: 50px;
   font-size: 30px;
-  font-weight: 400;
   letter-spacing: -0.04em;;
   text-decoration: none;
   color: black;
   display: flex;
   justify-content: space-between;
 }
+
+.portfolio__link:hover {
+  opacity: 0.7;
+}
+
 
 @media screen and (max-width: 768px) {
   .portfolio__link {

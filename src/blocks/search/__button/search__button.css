@@ -13,6 +13,10 @@
   cursor: pointer;
 }
 
+.search__button:hover {
+  opacity: 0.8;
+}
+
 @media screen and (max-width: 768px) {
   .search__button {
     margin-left: 21px;

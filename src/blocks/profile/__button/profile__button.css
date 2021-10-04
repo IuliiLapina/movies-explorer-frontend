@@ -2,12 +2,11 @@
   cursor: pointer;
   font-size: 13px;
   line-height: 16px;
-  font-weight: 400;
   background-color: white;
   border: none;
   padding: 0;
-  width: 413px;
   padding-top: 204px;
+  margin: 0 auto;
 }
 
 .profile__button:hover {
@@ -23,7 +22,6 @@
 @media screen and (max-width: 540px) {
   .profile__button {
     padding-left: 3px;
-    width: 260px;
     padding-top: 363px;
     font-size: 12px;
     line-height: 15px;

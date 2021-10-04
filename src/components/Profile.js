@@ -8,7 +8,7 @@ function Profile () {
         <h2 className="popup__title popup__title_profile">Привет, Виталий!</h2>
         <form className="popup__form popup__form_profile" name='form-register'>
           <div className="profile__input-container">
-            <label className="profile__input-heading" for="edit-name-input">Имя</label>
+            <label className="profile__input-heading" htmlFor="edit-name-input">Имя</label>
             <input
               id="edit-name-input"
               className="profile__input"
@@ -21,7 +21,7 @@ function Profile () {
           </div>
 
           <div className="profile__input-container">
-            <label className="profile__input-heading" for="edit-email-input">E-mail</label>
+            <label className="profile__input-heading" htmlFor="edit-email-input">E-mail</label>
             <input
               id="edit-email-input"
               className="profile__input"
