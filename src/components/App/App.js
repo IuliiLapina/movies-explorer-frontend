@@ -56,6 +56,10 @@ function App() {
             />
           </Route>
 
+          <Route path='*'>
+            <PageNotFound/>
+          </Route>
+
         </Switch>
         <InfoTooltip/>
     </div>
