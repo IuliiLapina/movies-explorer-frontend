@@ -1,0 +1,22 @@
+.card__duration {
+  color: #A0A0A0;
+  font-size: 11px;
+  line-height: 13px;
+  margin: 0;
+  padding: 17px 0 0 16px;
+  grid-area: duration;
+}
+
+@media screen and (max-width: 768px) {
+  .card__duration {
+    padding: 16px 0 0 14px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card__duration {
+    font-size: 10px;
+    line-height: 12px;
+    padding: 14px 0 0 14px;
+  }
+}

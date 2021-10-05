@@ -1,0 +1,9 @@
+.header__menu-link-item_active {
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .header__menu-link-item_active {
+    border-bottom: 2px solid black;
+  }
+}

@@ -1,0 +1,20 @@
+.about-project__content {
+  padding-top: 70px;
+  padding-bottom: 110px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__content {
+    padding-bottom: 93px;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .about-project__content {
+    display: block;
+    padding-top: 61px;
+    padding-bottom: 60px;
+  }
+}

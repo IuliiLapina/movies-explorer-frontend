@@ -1,0 +1,40 @@
+#header__menu-toggle {
+  opacity: 0;
+  position: absolute;
+}
+
+@media screen and (max-width: 768px) {
+  #header__menu-toggle:checked ~ .header__menu-btn > span {
+    transform: rotate(45deg);
+    top: 12px;
+    right: -11px;
+    width: 21px;
+  }
+  #header__menu-toggle:checked ~ .header__menu-btn > span::before {
+    top: 0;
+    transform: rotate(0);
+  }
+  #header__menu-toggle:checked ~ .header__menu-btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+  #header__menu-toggle:checked ~ .header__menu-link {
+    visibility: visible;
+    top: 0;
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  #header__menu-toggle:checked ~ .header__menu-btn > span {
+    top: 2px;
+    right: -5px;
+    width: 22px;
+  }
+  #header__menu-toggle:checked ~ .header__menu-btn > span::before {
+    top: 0;
+  }
+  #header__menu-toggle:checked ~ .header__menu-btn > span::after {
+    top: 0;
+  }
+}

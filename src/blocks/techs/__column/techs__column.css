@@ -1,0 +1,26 @@
+.techs__column {
+  margin: 0 auto;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+  padding-right: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .techs__column {
+    padding-top: 83px;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .techs__column {
+    padding-top: 50px;
+    padding-right: 41px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 84px);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+  }
+}

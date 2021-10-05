@@ -1,0 +1,25 @@
+.header__menu-link-item_profile {
+  background-color: #F9F9F9;
+  padding: 8px 20px;
+  border-radius: 20px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .header__menu-link-item_profile {
+    padding: 8px 20px;
+    line-height: 16px;
+    font-size: 14px;
+    position: absolute;
+    bottom: 250px;
+    right: 212px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .header__menu-link-item_profile {
+    bottom: 191px;
+    right: 112px;
+  }
+}

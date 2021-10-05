@@ -1,0 +1,20 @@
+.form-auth{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 396px;
+}
+
+@media screen and (max-width: 900px) {
+  .form-auth{
+    padding-bottom: 60px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .form-auth{
+    min-width: 260px;
+    padding-bottom: 30px;
+    margin: 0 auto;
+  }
+}

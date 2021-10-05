@@ -1,0 +1,12 @@
+.all-content-page {
+  background-color: white;
+  font-family: "Inter", "Arial", sans-serif;
+  color: black;
+  font-weight: 400;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+}

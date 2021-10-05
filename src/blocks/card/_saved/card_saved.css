@@ -1,0 +1,7 @@
+.card_saved {
+  cursor: pointer;
+}
+
+.card_saved:hover .card__delete-btn{
+  display: block;
+}

@@ -1,0 +1,52 @@
+.search__input {
+  background-image: url('../../../images/icon/lupa.svg');
+  background-repeat: no-repeat;
+  background-position-x: left;
+  background-position-y: center;
+  color: #A0A0A0;
+  border: none;
+  background-color: #F9F9F9;
+  padding: 0px 0px 0px 38px;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 400;
+  width: 75%;
+}
+
+@media screen and (max-width: 1000px) {
+  .search__input {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .search__input {
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .search__input {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .search__input {
+    font-size: 14px;
+    width: 86%;
+
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .search__input {
+    padding: 0px 0px 2px 19px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .search__input {
+    width: 76%;
+  }
+}

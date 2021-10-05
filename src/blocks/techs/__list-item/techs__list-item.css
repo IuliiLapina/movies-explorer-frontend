@@ -1,0 +1,21 @@
+.techs__list-item {
+  font-size: 14px;
+  line-height: 17px;
+  background-color: #E8E8E8;
+  border-radius: 10px;
+  min-width: 90px;
+  min-height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 790px) {
+  .techs__list-item {
+    font-size: 12px;
+    line-height: 15px;
+    min-width: 84px;
+    min-height: 57px;
+  }
+}

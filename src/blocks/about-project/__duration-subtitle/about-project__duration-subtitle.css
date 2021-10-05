@@ -1,0 +1,23 @@
+.about-project__duration-subtitle {
+  color: #A0A0A0;
+  line-height: 17px;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+  padding-top: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__duration-subtitle {
+    padding-top: 14px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .about-project__duration-subtitle {
+    line-height: 12px;
+    font-size: 11px;
+    padding-top: 10px;
+  }
+}

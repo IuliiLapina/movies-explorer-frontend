@@ -1,0 +1,24 @@
+.promo__list-item {
+  background-color: #E8E8E8;
+  border-radius: 10px;
+  min-width: 96px;
+  min-height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.promo__list-item:last-child {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 370px) {
+  .promo__list-item {
+    border-radius: 6px;
+    min-width: 82px;
+    min-height: 26px;
+    margin-right: 6px;
+  }
+}
+

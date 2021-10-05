@@ -1,0 +1,16 @@
+.page-not-found__error-title {
+  font-size: 140px;
+  line-height: 170px;
+  font-weight: 400;
+  margin: 0px;
+  padding-bottom: 5px;
+}
+
+@media screen and (max-width: 630px) {
+  .page-not-found__error-title {
+    font-size: 80px;
+    line-height: 97px;
+    padding-bottom: 10px;
+    padding-top: 329px;
+  }
+}

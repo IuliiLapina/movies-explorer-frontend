@@ -1,0 +1,16 @@
+.about-project__duration-time {
+  line-height: 17px;
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+  padding: 9px 0;
+  background-color: #F2F2F2;
+}
+
+@media screen and (max-width: 430px) {
+  .about-project__duration-time {
+    line-height: 13px;
+    font-size: 11px;
+    padding: 11px 0;
+  }
+}

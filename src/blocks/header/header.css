@@ -1,0 +1,42 @@
+.header {
+  min-height: 74px;
+  padding: 18px 70px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    min-height: 76px;
+    padding-left: 30px;
+    padding-right: 28px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    min-height: 70px;
+    padding-left: 14px;
+    padding-right: 12px
+  }
+}
+
+.header_auth {
+  padding: 70px 0px 0px;
+  width: 396px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 900px) {
+  .header_auth {
+    padding: 232px 0px 0px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .header_auth {
+    padding: 56px 0px 0px;
+    width: 260px;
+    justify-content: center;
+  }
+}

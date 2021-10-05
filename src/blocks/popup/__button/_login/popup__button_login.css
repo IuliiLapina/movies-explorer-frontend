@@ -1,0 +1,13 @@
+.popup__button_login {
+  margin-top: 168px;
+}
+
+.popup__button_login:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 438px) {
+  .popup__button_login {
+    margin-top: 257px;
+  }
+}

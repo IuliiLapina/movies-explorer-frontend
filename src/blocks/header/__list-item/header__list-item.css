@@ -1,0 +1,13 @@
+@media screen and (max-width: 768px) {
+  .header__list-item {
+    padding-left: 4px;
+    padding-bottom: 28px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .header__list-item {
+    padding-left: 4px;
+    padding-bottom: 24px;
+  }
+}

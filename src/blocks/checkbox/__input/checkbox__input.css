@@ -1,0 +1,8 @@
+.checkbox__input {
+  display: none;
+}
+
+.checkbox__input:checked ~ .checkbox__container::before {
+  background-color: #F5F5F5;
+  left: 1px;
+}

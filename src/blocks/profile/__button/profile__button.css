@@ -1,0 +1,29 @@
+.profile__button {
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 16px;
+  background-color: white;
+  border: none;
+  padding: 0;
+  padding-top: 204px;
+  margin: 0 auto;
+}
+
+.profile__button:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__button {
+    padding-top: 194px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .profile__button {
+    padding-left: 3px;
+    padding-top: 363px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

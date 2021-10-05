@@ -1,0 +1,25 @@
+.search__button {
+  background-color: #3456F3;
+  background-image: url('../../../images/icon/search-arrow.svg');
+  background-repeat: no-repeat;
+  background-position-x: 14px;
+  background-position-y: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 48px;
+  border: none;
+  margin-right: 30px;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+.search__button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 768px) {
+  .search__button {
+    margin-left: 21px;
+    margin-right: 19px;
+  }
+}

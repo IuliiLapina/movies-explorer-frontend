@@ -1,0 +1,38 @@
+.checkbox {
+  display: flex;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 18px;
+  border-left: 1px solid #E8E8E8;
+  padding: 10px 0 10px 30px;
+}
+
+@media screen and (max-width: 1210px) {
+  .checkbox {
+    padding: 10px 0 10px 21px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .checkbox {
+    position: absolute;
+    top: 107px;
+    right: 10px;
+    border-left: none;
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .checkbox {
+    top: 107px;
+    left: 55px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .checkbox {
+    top: 107px;
+    left: 55px;
+  }
+}
