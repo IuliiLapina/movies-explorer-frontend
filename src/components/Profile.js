@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Profile () {
+function Profile ({handleExit}) {
   return (
     <section className="profile">
       <div className="popup__container popup__container_profile">
@@ -38,7 +38,7 @@ function Profile () {
             className="profile__button"
             value="Редактировать"
           />
-          <Link className="profile__link" to="/">Выйти из аккаунта</Link>
+          <Link className="profile__link" to="/" onClick={handleExit}>Выйти из аккаунта</Link>
         </form>
       </div>
     </section>

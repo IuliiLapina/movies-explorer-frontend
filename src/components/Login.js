@@ -1,14 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Login ({title, buttonText}) {
+function Login ({title, buttonText, authAuthorize}) {
+  const [emailInputValue, setEmailInputValue] = React.useState('');
+  const [passwordInputValue, setPasswordInputValue] = React.useState('');
+
+  function handleChangeEmail(e) {
+    setEmailInputValue(e.target.value)
+  }
+
+  function handleChangePassword(e) {
+    setPasswordInputValue(e.target.value)
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const email = emailInputValue;
+    const password = passwordInputValue;
+
+    authAuthorize(email, password);
+    setPasswordInputValue('');
+    setEmailInputValue('');
+  }
   return (
     <div className="form-auth">
       <div className="popup__container">
         <h2 className="popup__title">{title}</h2>
-        <form className="popup__form" name='form-register'>
+        <form className="popup__form" name="form-register" onSubmit={handleSubmit}>
           <label className="popup__input-heading" htmlFor="email-input">E-mail</label>
           <input
+            value={emailInputValue}
+            onChange={handleChangeEmail}
             id="email-input"
             className="popup__input popup__input-text popup__input-text_type_link-email"
             type="email"
@@ -20,6 +43,8 @@ function Login ({title, buttonText}) {
 
           <label className="popup__input-heading" htmlFor="password-input">Пароль</label>
           <input
+            value={passwordInputValue}
+            onChange={handleChangePassword}
             id="password-input"
             className="popup__input popup__input-text popup__input-text_type_link-password"
             type="password"

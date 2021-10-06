@@ -2,14 +2,14 @@ import React from "react";
 // import Preloader from './Preloader/Preloader'
 import SearchForm from './SearchForm'
 import MoviesCardList from './MoviesCardList'
-import saveCardData from "../utils/saveCardData"
 
-function Movies () {
+function Movies ({films}) {
   return (
     <main className="content">
       <SearchForm/>
       <MoviesCardList
-      cardData={saveCardData}/>
+        films={films}
+      />
     </main>
   );
 }

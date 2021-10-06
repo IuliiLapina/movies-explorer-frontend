@@ -10,7 +10,7 @@ function MoviesCard ({card}) {
     <li className="card card_saved">
       <img className="card__image" src={card.link} alt={card.title}/>
       <div className="card__description">
-        <h2 className="card__title">{card.title}</h2>
+        <h2 className="card__title">{card.nameRU}</h2>
         <p className="card__duration">{card.duration}</p>
         <button className={classNameCardBtn} type="button"></button>
       </div>
