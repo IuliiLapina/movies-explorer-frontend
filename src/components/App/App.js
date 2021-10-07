@@ -141,6 +141,7 @@ function App() {
   function handleExit () {
     setLoggedIn(false);
     setEmail('');
+    setName('');
     localStorage.removeItem('token');
     history.push('/signin');
   }
@@ -160,27 +161,26 @@ function App() {
             <Footer />
           </Route>
 
-          <Route path="/movies">
-            <Movies
-              films={cardData}
-            />
-            <Footer />
-          </Route>
-
-          <Route path="/saved-movies">
-            <SavedMovies
-              films={saveCardData}
-            />
-            <Footer />
-          </Route>
-
-          <Route path="/profile">
-            <Profile
-              name={name}
-              email={email}
-              handleExit={handleExit}
-            />
-          </Route>
+          <ProtectedRoute
+            exact path="/movies"
+            loggedIn={loggedIn}
+            component={Movies}
+            films={cardData}
+          />
+          <ProtectedRoute
+            exact path="/saved-movies"
+            loggedIn={loggedIn}
+            component={SavedMovies}
+            films={saveCardData}
+          />
+          <ProtectedRoute
+            exact path="/profile"
+            loggedIn={loggedIn}
+            component={Profile}
+            name={name}
+            email={email}
+            handleExit={handleExit}
+          />
 
           <Route path="/signup">
             <Register
