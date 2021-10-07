@@ -4,6 +4,8 @@
   font-size: 14px;
   line-height: 17px;
   text-decoration: none;
+  background-color: white;
+  border: none;
 }
 
 .page-not-found__link:hover {

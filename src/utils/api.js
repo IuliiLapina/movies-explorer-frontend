@@ -13,7 +13,7 @@ class Api {
 
   //получить инфо пользователя с сервера
   getUserData() {
-    return fetch(`${this._address}/me`, {
+    return fetch(`${this._address}/`, {
       headers: this._headers,
       credentials: 'include',
     })

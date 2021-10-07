@@ -1,9 +1,11 @@
 import React from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
 import Header from "../Header";
 import Main from "../Main";
 import Footer from "../Footer";
+
+import ProtectedRoute from "../ProtectedRoute";
 
 import Register from "../Register";
 import Login from "../Login";
@@ -32,27 +34,12 @@ function App() {
   const [email, setEmail] = React.useState('');
   const [name, setName] = React.useState('');
 
-  const [selectedCard, setSelectedCard] = React.useState({});
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = React.useState(false);
   const [titleInfoTooltipPopup, setTitleInfoTooltipPopup] = React.useState('');
   const [subtitleInfoTooltipPopup, setSubtitleInfoTooltipPopup] = React.useState('');
 
-  //Обработчики открытия попапов
-  function handleInfoTooltipPopupOpen() {
-    setInfoTooltipPopupOpen(true)
-  }
-
-  //Обработчик закрытия попапов
-  function closeAllPopups() {
-    setInfoTooltipPopupOpen(false);
-
-    setSelectedCard({}); //пустой объект для очистки данных карточки
-  }
-
-  function handleInfoTooltipContent(title, subtitle) {
-    setTitleInfoTooltipPopup(title);
-    setSubtitleInfoTooltipPopup(subtitle);
-  }
+  const [selectedCard, setSelectedCard] = React.useState({});
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -64,7 +51,6 @@ function App() {
           setLoggedIn(true);
           setEmail(res.data.email);
           setName(res.data.name);
-
           history.push('/movies');
         })
       .catch((err) => console.log(err));
@@ -83,17 +69,35 @@ function App() {
     }
   }, [loggedIn]);
 
+
+  //Обработчики открытия попапов
+  function handleInfoTooltipPopupOpen() {
+    setInfoTooltipPopupOpen(true)
+  }
+
+  //Обработчик закрытия попапов
+  function closeAllPopups() {
+    setInfoTooltipPopupOpen(false);
+
+    setSelectedCard({}); //пустой объект для очистки данных карточки
+  }
+
+  function handleInfoTooltipContent(title, subtitle) {
+    setTitleInfoTooltipPopup(title);
+    setSubtitleInfoTooltipPopup(subtitle);
+  }
+
   //регистрация пользователя
   function authRegister(name, email, password) {
     auth
     .register(name, email, password)
       .then(() => {
-        handleInfoTooltipContent('Вы успешно зарегистрировались!');
+        handleInfoTooltipContent('Вы успешно зарегистрировались!', 'Ура!');
         handleInfoTooltipPopupOpen();
         history.push('/signin');
       })
       .catch((err) => {
-        handleInfoTooltipContent('Что-то пошло не так! Попробуйте ещё раз.');
+        handleInfoTooltipContent('Что-то пошло не так! Попробуйте ещё раз.', 'об нет!');
         handleInfoTooltipPopupOpen();
         console.log(err);
       })
@@ -109,12 +113,12 @@ function App() {
             setCurrentUser(res);
             setLoggedIn(true);
             history.push('/movies');
-            handleInfoTooltipContent('Вы успешно авторизовались!');
+            handleInfoTooltipContent('Вы успешно авторизовались!', 'Ура!');
             handleInfoTooltipPopupOpen();
         }
     })
     .catch((err) => {
-      handleInfoTooltipContent('Что-то пошло не так! Попробуйте ещё раз.');
+      handleInfoTooltipContent('Что-то пошло не так! Попробуйте ещё раз.', 'о, нет');
       handleInfoTooltipPopupOpen();
       console.log(err);
     })
