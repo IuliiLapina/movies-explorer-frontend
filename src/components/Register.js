@@ -1,85 +1,121 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useFormWithValidation } from "../utils/formValidator";
 
-function Register({title, buttonText, authRegister}) {
-  const [nameInputValue, setNameInputValue] = React.useState('');
-  const [emailInputValue, setEmailInputValue] = React.useState('');
-  const [passwordInputValue, setPasswordInputValue] = React.useState('');
-
-  function handleChangeName(e) {
-    setNameInputValue(e.target.value)
-  }
-
-  function handleChangeEmail(e) {
-    setEmailInputValue(e.target.value)
-  }
-
-  function handleChangePassword(e) {
-    setPasswordInputValue(e.target.value)
-  }
+function Register({ title, buttonText, authRegister }) {
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    const name = nameInputValue;
-    const email = emailInputValue;
-    const password = passwordInputValue;
-
-    authRegister(name, email, password);
-    setPasswordInputValue('');
+    authRegister(values["name"], values["email"], values["password"]);
   }
+
   return (
     <div className="form-auth">
       <div className="popup__container">
         <h2 className="popup__title">{title}</h2>
-        <form className="popup__form" name="form-register" onSubmit={handleSubmit}>
-          <label className="popup__input-heading" htmlFor="name-input">Имя</label>
+        <form
+          className="popup__form"
+          name="form-register"
+          onSubmit={handleSubmit}
+          noValidate
+        >
+          <label className="popup__input-heading" htmlFor="name-input">
+            Имя
+          </label>
           <input
-            value={nameInputValue}
-            onChange={handleChangeName}
+            className={`popup__input popup__input-text ${
+              errors["name"] &&
+              errors["name"] !== "" &&
+              `popup__input_type_error`
+            }`}
+            onChange={handleChange}
             id="name-input"
-            className="popup__input popup__input-text popup__input-text_type_link-name"
             type="text"
             placeholder="Виталий"
             name="name"
+            pattern='^[A-Za-zА-Яа-я\s]{-}$'
+            minLength="2"
+            maxLength="30"
             required
           />
-          <span className="popup__input-error name-input-error"></span>
+          <span
+            className={`popup__input-error ${
+              errors["name"] &&
+              errors["name"] !== "" &&
+              `popup__input-error_type_active`
+            }`}
+          >
+            {errors["name"]}
+          </span>
 
-          <label className="popup__input-heading" htmlFor="email-input">E-mail</label>
+          <label className="popup__input-heading" htmlFor="email-input">
+            E-mail
+          </label>
           <input
-            value={emailInputValue}
-            onChange={handleChangeEmail}
+            className={`popup__input popup__input-text ${
+              errors["email"] &&
+              errors["email"] !== "" &&
+              `popup__input_type_error`
+            }`}
+            onChange={handleChange}
             id="email-input"
-            className="popup__input popup__input-text popup__input-text_type_link-email"
             type="email"
             placeholder="pochta@yandex.ru|"
             name="email"
+            pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+            minLength="2"
             required
           />
-          <span className="popup__input-error email-input-error"></span>
+          <span
+            className={`popup__input-error ${
+              errors["email"] &&
+              errors["email"] !== "" &&
+              `popup__input-error_type_active`
+            }`}
+          >
+            {errors["email"]}
+          </span>
 
-          <label className="popup__input-heading" htmlFor="password-input">Пароль</label>
+          <label className="popup__input-heading" htmlFor="password-input">
+            Пароль
+          </label>
           <input
-            value={passwordInputValue}
-            onChange={handleChangePassword}
+            className={`popup__input popup__input-text ${
+              errors["password"] &&
+              errors["password"] !== "" &&
+              `popup__input_type_error`
+            }`}
+            onChange={handleChange}
             id="password-input"
-            className="popup__input popup__input-text popup__input-text_type_link-password"
             type="password"
             name="password"
+            minLength="8"
             required
           />
-          <span className="popup__input-error password-input-error popup__input-error_type_active"></span>
+          <span
+            className={`popup__input-error ${
+              errors["password"] &&
+              errors["password"] !== "" &&
+              `popup__input-error_type_active`
+            }`}
+          >
+            {errors["password"]}
+          </span>
 
           <input
             type="submit"
-            className="popup__button"
+            className={`popup__button ${!isValid && `popup__button_disabled`}`}
+            disabled={!isValid}
             value={buttonText}
           />
         </form>
       </div>
       <div className="form-auth__text-container">
         <p className="form-auth__text">Уже зарегистрированы?</p>
-        <Link className="form-auth__link" to="/signin">Войти</Link>
+        <Link className="form-auth__link" to="/signin">
+          Войти
+        </Link>
       </div>
     </div>
   );

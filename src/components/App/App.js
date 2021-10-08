@@ -92,20 +92,22 @@ function App() {
     auth
     .register(name, email, password)
       .then(() => {
-        handleInfoTooltipContent('Вы успешно зарегистрировались!', 'Ура!');
-        handleInfoTooltipPopupOpen();
         history.push('/signin');
+        authAuthorize(email, password)
+        handleInfoTooltipContent('Вы успешно зарегистрировались!');
+        handleInfoTooltipPopupOpen();
       })
       .catch((err) => {
-        handleInfoTooltipContent('Что-то пошло не так! Попробуйте ещё раз.', 'об нет!');
+        handleInfoTooltipContent('Что-то пошло не так!', 'Попробуйте ещё раз. ' + err);
         handleInfoTooltipPopupOpen();
         console.log(err);
       })
   }
 
   //авторизация пользователя
-  function authAuthorize(password, email) {
-    auth.authorize(password, email)
+  function authAuthorize(email, password) {
+    auth
+    .authorize(email, password)
         .then((res) => {
           if (res) {
             localStorage.setItem('token', res.token)
@@ -113,12 +115,10 @@ function App() {
             setCurrentUser(res);
             setLoggedIn(true);
             history.push('/movies');
-            handleInfoTooltipContent('Вы успешно авторизовались!', 'Ура!');
-            handleInfoTooltipPopupOpen();
         }
     })
     .catch((err) => {
-      handleInfoTooltipContent('Что-то пошло не так! Попробуйте ещё раз.', 'о, нет');
+      handleInfoTooltipContent('Что-то пошло не так!', 'Попробуйте ещё раз. ' + err);
       handleInfoTooltipPopupOpen();
       console.log(err);
     })
@@ -151,7 +151,8 @@ function App() {
   })
 
   return (
-    <div className ="page">
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className ="page">
         <Header
           loggedIn = {loggedIn}
         />
@@ -209,7 +210,8 @@ function App() {
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
         />
-    </div>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
