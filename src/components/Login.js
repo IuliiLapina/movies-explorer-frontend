@@ -9,6 +9,7 @@ function Login ({title, buttonText, authAuthorize}) {
     e.preventDefault();
     authAuthorize(values["email"], values["password"]);
   }
+
   return (
     <div className="form-auth">
       <div className="popup__container">
