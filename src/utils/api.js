@@ -13,9 +13,24 @@ class Api {
 
   //получить инфо пользователя с сервера
   getUserData() {
-    return fetch(`${this._address}/`, {
+    return fetch(`${this._address}/users/me`, {
+      method: 'GET',
       headers: this._headers,
       credentials: 'include',
+    })
+    .then(this._checkResponse);
+  }
+
+  //обновить инфо пользователя на сервере
+  setUserData(email, name) {
+    return fetch(`${this._address}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      credentials: 'include',
+      body: JSON.stringify({
+        email,
+        name
+      })
     })
     .then(this._checkResponse);
   }

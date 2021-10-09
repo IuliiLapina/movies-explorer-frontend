@@ -25,7 +25,7 @@ export const authorize = (email, password) => {
 
   //если токен действителен, вернёт ответ с информацией о пользователе
 export const getContent = (token) => {
-  return fetch(`${BASE_URL}/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',

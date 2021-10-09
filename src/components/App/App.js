@@ -31,9 +31,6 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
 
-  const [email, setEmail] = React.useState('');
-  const [name, setName] = React.useState('');
-
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = React.useState(false);
   const [titleInfoTooltipPopup, setTitleInfoTooltipPopup] = React.useState('');
   const [subtitleInfoTooltipPopup, setSubtitleInfoTooltipPopup] = React.useState('');
@@ -41,16 +38,13 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
+  //проверка токена
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
-    // если у пользователя есть токен в localStorage,
-    // эта функция проверит, действующий он или нет
     if (jwt){
       auth.getContent(jwt)
         .then((res) => {
           setLoggedIn(true);
-          setEmail(res.data.email);
-          setName(res.data.name);
           history.push('/movies');
         })
       .catch((err) => console.log(err));
@@ -67,7 +61,7 @@ function App() {
       })
       .catch((err) => console.log(err));
     }
-  }, [loggedIn]);
+  }, [history, loggedIn]);
 
 
   //Обработчики открытия попапов
@@ -111,8 +105,9 @@ function App() {
         .then((res) => {
           if (res) {
             localStorage.setItem('token', res.token)
-            setEmail(res.email);
             setCurrentUser(res);
+            console.log('авторизация' + res.email)
+
             setLoggedIn(true);
             history.push('/movies');
         }
@@ -130,7 +125,6 @@ function App() {
     if (token) {
       auth.getContent(token)
         .then(res => {
-          setEmail(res.data.email);
           setLoggedIn(true)
         })
         .catch(e => { console.log(e) })
@@ -140,8 +134,6 @@ function App() {
   //выход из профиля
   function handleExit () {
     setLoggedIn(false);
-    setEmail('');
-    setName('');
     localStorage.removeItem('token');
     history.push('/signin');
   }
@@ -149,6 +141,23 @@ function App() {
   React.useEffect(() => {
     checkToken();
   })
+
+  //обновление данных пользователя
+  function onUpdateUserInfo(email, name) {
+    api
+    .setUserData(email, name)
+    .then((res) => {
+      setCurrentUser(res);
+      console.log(res)
+      handleInfoTooltipContent('Изменения сохранены.');
+      handleInfoTooltipPopupOpen();
+    })
+    .catch((err) => {
+      handleInfoTooltipContent('Что-то пошло не так!', 'Попробуйте ещё раз. ' + err);
+      handleInfoTooltipPopupOpen();
+      console.log(err);
+    })
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -178,8 +187,7 @@ function App() {
             exact path="/profile"
             loggedIn={loggedIn}
             component={Profile}
-            name={name}
-            email={email}
+            onUpdateUserInfo={onUpdateUserInfo}
             handleExit={handleExit}
           />
 

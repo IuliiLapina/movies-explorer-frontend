@@ -1,19 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormWithValidation } from "../utils/formValidator";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Profile ({handleExit, editProfile}) {
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+function Profile ({handleExit, onUpdateUserInfo}) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid, setIsValid } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    editProfile(values["email"], values["password"]);
+    onUpdateUserInfo( values["email"], values["name"]);
   }
+
+  React.useEffect(() => {
+    if (values["name"] === currentUser.name && values["email"] === currentUser.email) {
+      setIsValid(false);
+    }
+  }, [values])
+
+  React.useEffect(() => {
+    values["name"] = currentUser.name;
+    values["email"] = currentUser.email;
+  }, [currentUser])
+
 
   return (
     <section className="profile">
       <div className="popup__container popup__container_profile">
-        <h2 className="popup__title popup__title_profile">Привет, Виталий!</h2>
+        <h2 className="popup__title popup__title_profile">Привет, {currentUser.name}!</h2>
         <form className="popup__form popup__form_profile" name="form-register" onSubmit={handleSubmit} noValidate>
           <div className="profile__input-container">
             <label className="profile__input-heading" htmlFor="edit-name-input">Имя</label>
@@ -26,11 +40,12 @@ function Profile ({handleExit, editProfile}) {
               onChange={handleChange}
               id="edit-name-input"
               type="text"
-              placeholder="Виталий"
+              placeholder={currentUser.name}
               name="name"
               pattern='^[A-Za-zА-Яа-я\s]{-}$'
               minLength="2"
               maxLength="30"
+              value={ values["name"] }
               required
             />
 
@@ -56,10 +71,11 @@ function Profile ({handleExit, editProfile}) {
               onChange={handleChange}
               id="edit-email-input"
               type="email"
-              placeholder="pochta@yandex.ru"
+              placeholder={currentUser.email}
               name="email"
               pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
               minLength="2"
+              value={ values["email"] }
               required
             />
           </div>
@@ -73,9 +89,9 @@ function Profile ({handleExit, editProfile}) {
             {errors["email"]}
           </span>
           <input
+            type="submit"
             className={`profile__button ${!isValid && `popup__button_disabled`}`}
             disabled={!isValid}
-            type="button"
             value="Редактировать"
           />
           <Link className="profile__link" to="/" onClick={handleExit}>Выйти из аккаунта</Link>
