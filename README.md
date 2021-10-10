@@ -1,6 +1,5 @@
 # Movies frontend
 Сервис для поиска фильмов.
-
 <br>Домен сервера (фронтенд) - https://best-movies-explorer.nomoredomains.club
 <br>Домен сервера (бэкенд) - https://api.best-movies-explorer.nomoredomains.club
 <br>Публичный IP - сервера: 178.154.224.218
