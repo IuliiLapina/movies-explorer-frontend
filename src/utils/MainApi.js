@@ -34,15 +34,12 @@ class Api {
     })
     .then(this._checkResponse);
   }
-
 }
 
-const api = new Api({
+export const MainApi = new Api({
   address: "https://api.best-movies-explorer.nomoredomains.club",
   headers: {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${localStorage.getItem('token')}`,
   },
 });
-
-export default api;

@@ -21,7 +21,9 @@ import Preloader from "../Preloader";
 import cardData from "../../utils/cardData";
 import saveCardData from "../../utils/saveCardData";
 
-import api from '../../utils/api';
+import { MainApi } from '../../utils/MainApi';
+import { getMovies } from '../../utils/MoviesApi';
+
 import * as auth from '../../utils/auth.js';
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
@@ -54,7 +56,7 @@ function App() {
   React.useEffect(() => {
     if (loggedIn) {
       history.push('/movies');
-      api
+      MainApi
       .getUserData()
       .then((userData) => {
         setCurrentUser(userData);
@@ -144,7 +146,7 @@ function App() {
 
   //обновление данных пользователя
   function onUpdateUserInfo(email, name) {
-    api
+    MainApi
     .setUserData(email, name)
     .then((res) => {
       setCurrentUser(res);
