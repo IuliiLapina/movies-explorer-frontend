@@ -7,11 +7,6 @@ function Profile ({handleExit, onUpdateUserInfo}) {
   const currentUser = React.useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, setIsValid } = useFormWithValidation();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    onUpdateUserInfo( values["email"], values["name"]);
-  }
-
   React.useEffect(() => {
     if (values["name"] === currentUser.name && values["email"] === currentUser.email) {
       setIsValid(false);
@@ -23,6 +18,10 @@ function Profile ({handleExit, onUpdateUserInfo}) {
     values["email"] = currentUser.email;
   }, [currentUser])
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    onUpdateUserInfo( values["email"], values["name"]);
+  }
 
   return (
     <section className="profile">

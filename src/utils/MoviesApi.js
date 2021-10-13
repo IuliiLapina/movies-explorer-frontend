@@ -10,7 +10,6 @@ export const getMovies = () => {
     headers: {
       'Content-Type': 'application/json',
     },
-    credentials: 'include',
     method:'GET',
     })
     .then((res) => checkResponse(res));

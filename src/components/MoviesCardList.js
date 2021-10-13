@@ -1,14 +1,17 @@
 import React from "react";
-import MoviesCard from "./MoviesCard"
+import { useLocation } from 'react-router-dom';
+import MoviesCard from "./MoviesCard";
 
 function MoviesCardList ({films}) {
+  const location = useLocation();
+
   return (
     <section className="content-cards">
       <ul className="cards">
-        {films.map((card) => (
+        {films.map((film) => (
           <MoviesCard
-            card={card}
-            key={card._id}
+            film={film}
+            key={film.id}
           />
         ))}
       </ul>
@@ -20,19 +23,3 @@ function MoviesCardList ({films}) {
 }
 
 export default MoviesCardList;
-
-/*function MoviesCardList ({cards}) {
-  return (
-    <section className="content-cards">
-    <ul className="cards">
-      {cards.map((card) => (
-        <MoviesCard
-          card={card}
-          key={card._id}
-        />
-      ))}
-    </ul>
-  </section>
-  );
-}
-*/
