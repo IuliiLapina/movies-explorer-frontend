@@ -15,9 +15,12 @@ function MoviesCardList ({films}) {
           />
         ))}
       </ul>
-      <div className="cards__more-container">
-        <button type="button" className="cards__more-btn">Ещё</button>
-      </div>
+      {location.pathname === '/movies' ?
+        <div className="cards__more-container">
+          <button type="button" className="cards__more-btn">Ещё</button>
+        </div> : ''
+      }
+
   </section>
   );
 }

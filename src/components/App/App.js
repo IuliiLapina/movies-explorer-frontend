@@ -1,30 +1,23 @@
 import React from "react";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import ProtectedRoute from "../ProtectedRoute";
+
 import Header from "../Header";
 import Main from "../Main";
 import Footer from "../Footer";
-
-import ProtectedRoute from "../ProtectedRoute";
-
 import Register from "../Register";
 import Login from "../Login";
 import Profile from "../Profile";
-
 import Movies from "../Movies";
 import SavedMovies from "../SavedMovies";
-
 import InfoTooltip from "../InfoTooltip";
 import PageNotFound from "../PageNotFound";
-import Preloader from "../Preloader";
-
-import saveCardData from "../../utils/saveCardData";
 
 import { MainApi } from "../../utils/MainApi";
 import { getMovies } from "../../utils/MoviesApi";
-
 import * as auth from "../../utils/auth.js";
-import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
 function App() {
   const history = useHistory();
@@ -38,8 +31,8 @@ function App() {
   const [subtitleInfoTooltipPopup, setSubtitleInfoTooltipPopup] =
     React.useState("");
 
-  const [selectedCard, setSelectedCard] = React.useState({});
   const [cardList, setCardList] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   //проверка токена
   React.useEffect(() => {
@@ -74,8 +67,6 @@ function App() {
   //Обработчик закрытия попапов
   function closeAllPopups() {
     setInfoTooltipPopupOpen(false);
-
-    setSelectedCard({}); //пустой объект для очистки данных карточки
   }
 
   function handleInfoTooltipContent(title, subtitle) {
@@ -172,25 +163,40 @@ function App() {
   }
 
   //получить фильмы с стороннего api по поисковому запросу
-  function getMoviesCardList(film, isShort) {
-    if (film === "") {
+  function getMoviesCardList(searchFilm, isShort) {
+    if (searchFilm === "") {
       handleInfoTooltipContent("Нужно ввести ключевое слово");
       handleInfoTooltipPopupOpen();
       setCardList([]);
-      localStorage.setItem("movies", JSON.stringify([]));
+      localStorage.setItem("films", JSON.stringify([]));
       return;
     }
+    setIsLoading(true);
     getMovies()
-      .then((films) =>
-        setCardList(films)
-      )
+      .then((films) =>{
+        const filteredFilms = films.filter((film) => {
+          const filterRegexFilm = new RegExp(searchFilm, 'ig');
+          if (!isShort) {
+            return filterRegexFilm.test(film.nameRU)
+          } else {
+            return film.duration <= 40 && filterRegexFilm.test(film.nameRU)
+          }
+        })
+        setCardList(filteredFilms);
+        localStorage.setItem("films", JSON.stringify(filteredFilms));
+        if (filteredFilms.length === 0) {
+          handleInfoTooltipContent("Ничего не найдено");
+          handleInfoTooltipPopupOpen();
+        }
+      })
       .catch((err) => {
         handleInfoTooltipContent(
           "Во время запроса произошла ошибка.", "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
         );
         handleInfoTooltipPopupOpen();
         console.log(err);
-      });
+      })
+      .finally(() => setIsLoading(false))
   }
 
   return (
@@ -208,15 +214,16 @@ function App() {
             path="/movies"
             loggedIn={loggedIn}
             component={Movies}
-            getMoviesCardList={getMoviesCardList}
             films={cardList}
+            getMoviesCardList={getMoviesCardList}
+            isLoading={isLoading}
           />
           <ProtectedRoute
             exact
             path="/saved-movies"
             loggedIn={loggedIn}
             component={SavedMovies}
-            films={saveCardData}
+            films={cardList}
           />
           <ProtectedRoute
             exact

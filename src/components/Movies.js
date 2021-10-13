@@ -1,11 +1,12 @@
 import React from "react";
 // import Preloader from './Preloader/Preloader'
-import SearchForm from './SearchForm'
-import MoviesCardList from './MoviesCardList'
+import SearchForm from "./SearchForm";
+import MoviesCardList from "./MoviesCardList";
+import Preloader from "./Preloader";
 
-function Movies ({films, getMoviesCardList}) {
-  const [searchFilm, setSearchfilm] = React.useState('');
-  const [isShortFilm, setIsShortFilm] = React.useState('false');
+function Movies({ films, getMoviesCardList, isLoading }) {
+  const [searchFilm, setSearchfilm] = React.useState("");
+  const [isShortFilm, setIsShortFilm] = React.useState("false");
 
   function onSubmitSearchForm() {
     getMoviesCardList(searchFilm, isShortFilm);
@@ -19,9 +20,7 @@ function Movies ({films, getMoviesCardList}) {
         setSearchfilm={setSearchfilm}
         setIsShortFilm={setIsShortFilm}
       />
-      <MoviesCardList
-        films={films}
-      />
+      {isLoading ? <Preloader /> : <MoviesCardList films={films} />}
     </main>
   );
 }
