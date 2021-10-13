@@ -1,6 +1,5 @@
 import React from "react";
 import photo from '../images/photo/photo.png';
-import { Link } from 'react-router-dom';
 
 function AboutMe() {
   return (
@@ -19,8 +18,8 @@ function AboutMe() {
           </p>
 
           <ul className="about-me__column-links">
-            <li className="about-me__list-item"><Link to="https://ru-ru.facebook.com/" target="_blank" className="about-me__link">Facebook</Link></li>
-            <li className="about-me__list-item"><Link to="https://github.com/IuliiLapina" target="_blank" className="about-me__link">Github</Link></li>
+            <li className="about-me__list-item"><a href="https://ru-ru.facebook.com/" target="_blank" className="about-me__link" rel="noreferrer" >Facebook</a></li>
+            <li className="about-me__list-item"><a href="https://github.com/IuliiLapina" target="_blank" className="about-me__link" rel="noreferrer">Github</a></li>
           </ul>
         </div>
         <img className="about-me__photo" src={photo} alt="Фото фронтенд-разработчика"/>

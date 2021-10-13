@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from 'react-router-dom';
 import arrow from '../images/icon/arrow.svg';
 
 function Portfolio() {
@@ -8,19 +7,19 @@ function Portfolio() {
       <h3 className="portfolio__title">Портфолио</h3>
       <ul className="portfolio__links">
         <li className="portfolio__list-item">
-          <Link to="https://github.com/IuliiLapina/react-mesto-api-full" target="_blank" className="portfolio__link">Статичный сайт
+          <a href="https://github.com/IuliiLapina/how-to-learn" target="_blank" className="portfolio__link" rel="noreferrer">Статичный сайт
           <img className="portfolio__image-link" src={arrow} alt="Ссылка стрелка"/>
-          </Link>
+          </a>
         </li>
         <li className="portfolio__list-item">
-          <Link to="https://github.com/IuliiLapina/russian-travel" target="_blank" className="portfolio__link">Адаптивный сайт
+          <a href="https://github.com/IuliiLapina/russian-travel" target="_blank" className="portfolio__link" rel="noreferrer">Адаптивный сайт
           <img className="portfolio__image-link" src={arrow} alt="Ссылка стрелка"/>
-          </Link>
+          </a>
         </li>
         <li className="portfolio__list-item">
-          <Link to="https://github.com/IuliiLapina/how-to-learn" target="_blank" className="portfolio__link">Одностраничное приложение
+          <a href="https://github.com/IuliiLapina/react-mesto-api-full" target="_blank" className="portfolio__link" rel="noreferrer">Одностраничное приложение
           <img className="portfolio__image-link" src={arrow} alt="Ссылка стрелка"/>
-          </Link>
+          </a>
         </li>
       </ul>
     </section>

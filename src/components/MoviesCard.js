@@ -7,9 +7,13 @@ function MoviesCard({ film }) {
     location.pathname === `/movies` ? `card__like-btn` : `card__delete-btn`
   }`;
 
+  function handleCardClick() {
+    return window.open(film.trailerLink);
+  }
+
   return (
     <>
-      <li className="card card_saved">
+      <li className="card card_saved" onClick={handleCardClick}>
         <img
           className="card__image"
           src={`https://api.nomoreparties.co${film.image.url}`}
