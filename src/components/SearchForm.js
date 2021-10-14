@@ -1,13 +1,13 @@
 import React from "react";
 
-function SearchForm({ onSubmitSearchForm, searchFilm, setSearchfilm, setIsShortFilm }) {
+function SearchForm({ onSubmitSearchForm, searchFilm, setSearchFilm, setIsShortFilm }) {
   function handleSubmit(e) {
     e.preventDefault();
     onSubmitSearchForm();
   }
 
   function handleChangeSearchInput(e) {
-    setSearchfilm(e.target.value)
+    setSearchFilm(e.target.value)
   }
 
   function handleChangeChekxbox(e) {

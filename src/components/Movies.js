@@ -5,7 +5,7 @@ import MoviesCardList from "./MoviesCardList";
 import Preloader from "./Preloader";
 
 function Movies({ films, getMoviesCardList, isLoading }) {
-  const [searchFilm, setSearchfilm] = React.useState("");
+  const [searchFilm, setSearchFilm] = React.useState("");
   const [isShortFilm, setIsShortFilm] = React.useState("false");
 
   function onSubmitSearchForm() {
@@ -17,7 +17,7 @@ function Movies({ films, getMoviesCardList, isLoading }) {
       <SearchForm
         onSubmitSearchForm={onSubmitSearchForm}
         searchFilm={searchFilm}
-        setSearchfilm={setSearchfilm}
+        setSearchFilm={setSearchFilm}
         setIsShortFilm={setIsShortFilm}
       />
       {isLoading ? <Preloader /> : <MoviesCardList films={films} />}

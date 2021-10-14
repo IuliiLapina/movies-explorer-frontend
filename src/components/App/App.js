@@ -1,6 +1,5 @@
 import React from "react";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
-
+import { Route, Switch, useHistory } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import ProtectedRoute from "../ProtectedRoute";
 
@@ -132,16 +131,16 @@ function App() {
     }
   }
 
+  React.useEffect(() => {
+    checkToken();
+  });
+
   //выход из профиля
   function handleExit() {
     setLoggedIn(false);
     localStorage.removeItem("token");
     history.push("/signin");
   }
-
-  React.useEffect(() => {
-    checkToken();
-  });
 
   //обновление данных пользователя
   function onUpdateUserInfo(email, name) {
@@ -217,6 +216,7 @@ function App() {
             films={cardList}
             getMoviesCardList={getMoviesCardList}
             isLoading={isLoading}
+
           />
           <ProtectedRoute
             exact
