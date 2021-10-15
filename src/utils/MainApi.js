@@ -34,6 +34,26 @@ class Api {
     })
     .then(this._checkResponse);
   }
+  addSaveFilm(film) {
+    return fetch(`${this._address}/movies`, {
+      method:'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        country: film.country,
+        director: film.director,
+        duration: film.duration,
+        year: film.year,
+        description: film.description,
+        image: film.image,
+        trailer: film.trailer,
+        thumbnail: film.thumbnail,
+        movieId: film.movieId,
+        nameRU: film.nameRU,
+        nameEN: film.nameEN,
+      })
+    })
+      .then(this._checkResponse);
+  }
 }
 
 export const MainApi = new Api({
