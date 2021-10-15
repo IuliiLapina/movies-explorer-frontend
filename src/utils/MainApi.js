@@ -34,6 +34,16 @@ class Api {
     })
     .then(this._checkResponse);
   }
+
+  getSavedMovies() {
+    return fetch(`${this._address}/movies`, {
+      method:'GET',
+      headers: this._headers,
+      credentials: 'include',
+      })
+      .then(this._checkResponse);
+  }
+
   addSaveFilm(film) {
     return fetch(`${this._address}/movies`, {
       method:'POST',
