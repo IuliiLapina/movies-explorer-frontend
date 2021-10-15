@@ -2,17 +2,28 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import MoviesCard from "./MoviesCard";
 
-function MoviesCardList({ films }) {
+function MoviesCardList({ films, handleSaveFilm }) {
   const location = useLocation();
   const windowWidtn = window.innerWidth;
   const windowWidtnBig = 1280;
-  const windowWidtnMedium = 768
+  const windowWidtnMedium = 768;
 
-  const [showСards, setShowСards] = React.useState((windowWidtn >= windowWidtnBig) ? 12 : (windowWidtn >= windowWidtnMedium ? 8 : 5));
-  const [stepOfShowingCards, setStepOfShowingCards] = React.useState((windowWidtn >= windowWidtnBig) ? 3 : 2);
+  const [showСards, setShowСards] = React.useState(
+    windowWidtn >= windowWidtnBig
+      ? 12
+      : windowWidtn >= windowWidtnMedium
+      ? 8
+      : 5
+  );
+  const [stepOfShowingCards, setStepOfShowingCards] = React.useState(
+    windowWidtn >= windowWidtnBig ? 3 : 2
+  );
 
   window.onresize = () => {
-    setTimeout(setStepOfShowingCards(windowWidtn > windowWidtnBig ? 3 : 2), 500);
+    setTimeout(
+      setStepOfShowingCards(windowWidtn > windowWidtnBig ? 3 : 2),
+      500
+    );
   };
 
   function handleClickMoreBtn() {
@@ -22,9 +33,12 @@ function MoviesCardList({ films }) {
   return (
     <section className="content-cards">
       <ul className="cards">
-        {console.log(films.length)}
         {films.slice(0, showСards).map((film) => (
-          <MoviesCard film={film} key={film.id} />
+          <MoviesCard
+            film={film}
+            key={film.id}
+            onFilmLike={handleSaveFilm}
+          />
         ))}
       </ul>
       {location.pathname === "/movies" ? (

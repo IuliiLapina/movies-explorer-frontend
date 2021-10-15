@@ -252,6 +252,20 @@ function App() {
 
   //сохранить фильм в сохранённые фильмы
   function handleSaveFilm(film) {
+    MainApi
+    .addSaveFilm(film)
+      .then((newFilm) => {
+        setSavedCardList([newFilm, ...savedCardList])
+        localStorage.setItem("save-movies", JSON.stringify([newFilm, ...savedCardList]));
+      })
+      .catch((err) => {
+        handleInfoTooltipContent(
+          "Что-то пошло не так!",
+          "Попробуйте ещё раз. " + err
+        );
+        handleInfoTooltipPopupOpen();
+        console.log(err);
+      });
   }
 
   return (

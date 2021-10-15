@@ -4,7 +4,7 @@ import SearchForm from "./SearchForm";
 import MoviesCardList from "./MoviesCardList";
 import Preloader from "./Preloader";
 
-function Movies({ films, getMoviesCardList, isLoading }) {
+function Movies({ films, getMoviesCardList, isLoading, handleSaveFilm }) {
   const [searchFilm, setSearchFilm] = React.useState("");
   const [isShortFilm, setIsShortFilm] = React.useState("false");
 
@@ -20,7 +20,7 @@ function Movies({ films, getMoviesCardList, isLoading }) {
         setSearchFilm={setSearchFilm}
         setIsShortFilm={setIsShortFilm}
       />
-      {isLoading ? <Preloader /> : <MoviesCardList films={films} />}
+      {isLoading ? <Preloader /> : <MoviesCardList films={films} handleSaveFilm={handleSaveFilm}/>}
     </main>
   );
 }
