@@ -31,6 +31,8 @@ function App() {
     React.useState("");
 
   const [cardList, setCardList] = React.useState([]);
+  const [savedCardList, setSavedCardList] = React.useState([]);
+
   const [isLoading, setIsLoading] = React.useState(false);
 
   //проверка токена
@@ -139,7 +141,10 @@ function App() {
   function handleExit() {
     setLoggedIn(false);
     localStorage.removeItem("token");
-    history.push("/signin");
+    localStorage.removeItem("movies");
+    localStorage.removeItem("save-movies");
+
+    history.push("/");
   }
 
   //обновление данных пользователя
@@ -167,7 +172,7 @@ function App() {
       handleInfoTooltipContent("Нужно ввести ключевое слово");
       handleInfoTooltipPopupOpen();
       setCardList([]);
-      localStorage.setItem("films", JSON.stringify([]));
+      localStorage.setItem("movies", JSON.stringify([]));
       return;
     }
     setIsLoading(true);
@@ -182,7 +187,7 @@ function App() {
           }
         })
         setCardList(filteredFilms);
-        localStorage.setItem("films", JSON.stringify(filteredFilms));
+        localStorage.setItem("movies", JSON.stringify(filteredFilms));
         if (filteredFilms.length === 0) {
           handleInfoTooltipContent("Ничего не найдено");
           handleInfoTooltipPopupOpen();
@@ -196,6 +201,57 @@ function App() {
         console.log(err);
       })
       .finally(() => setIsLoading(false))
+  }
+
+  //получить сохраненные фильмы по поисковому запросу
+  function getMoviesSaveCardList(searchFilm, isShort) {
+    if (searchFilm === "") {
+      handleInfoTooltipContent("Нужно ввести ключевое слово");
+      handleInfoTooltipPopupOpen();
+      setCardList([]);
+      localStorage.setItem("save-movies", JSON.stringify([]));
+      return;
+    }
+    setIsLoading(true);
+    MainApi
+    .getSavedMovies()
+      .then((films) =>{
+        const filteredFilms = films.filter((film) => {
+          const filterRegexFilm = new RegExp(searchFilm, 'ig');
+          if (!isShort) {
+            return filterRegexFilm.test(film.nameRU)
+          } else {
+            return film.duration <= 40 && filterRegexFilm.test(film.nameRU)
+          }
+        })
+        setCardList(filteredFilms);
+        if (filteredFilms.length === 0) {
+          handleInfoTooltipContent("Ничего не найдено");
+          handleInfoTooltipPopupOpen();
+        }
+      })
+      .catch((err) => {
+        handleInfoTooltipContent(
+          "Во время запроса произошла ошибка.", "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+        );
+        handleInfoTooltipPopupOpen();
+        console.log(err);
+      })
+      .finally(() => setIsLoading(false))
+  }
+
+  //получить фильмы из локального хранилища
+  React.useEffect(() => {
+    const localStorageMoviesCardList = JSON.parse(localStorage.getItem("movies"));
+    if (loggedIn) {
+      if (localStorageMoviesCardList) {
+        setCardList(localStorageMoviesCardList);
+      }
+    }
+  }, [loggedIn])
+
+  //сохранить фильм в сохранённые фильмы
+  function handleSaveFilm(film) {
   }
 
   return (
@@ -213,17 +269,19 @@ function App() {
             path="/movies"
             loggedIn={loggedIn}
             component={Movies}
+            handleSaveFilm={handleSaveFilm}
             films={cardList}
             getMoviesCardList={getMoviesCardList}
             isLoading={isLoading}
-
           />
           <ProtectedRoute
             exact
             path="/saved-movies"
             loggedIn={loggedIn}
             component={SavedMovies}
-            films={cardList}
+            films={savedCardList}
+            getMoviesCardList={getMoviesSaveCardList}
+            isLoading={isLoading}
           />
           <ProtectedRoute
             exact
