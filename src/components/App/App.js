@@ -142,8 +142,9 @@ function App() {
     setLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("movies");
-    localStorage.removeItem("save-movies");
-
+    setCurrentUser({
+      name: "", email: ""
+    });
     history.push("/");
   }
 
@@ -203,16 +204,39 @@ function App() {
       .finally(() => setIsLoading(false))
   }
 
-  //получить сохраненные фильмы по поисковому запросу
+  //получить сохраненные фильмы пользователя
+  React.useEffect(() => {
+    setIsLoading(true);
+    if (loggedIn) {
+      MainApi
+      .getSavedMovies()
+        .then((films) =>{
+          localStorage.setItem('save-movies', JSON.stringify(films));
+          setSavedCardList(films);
+        })
+        .catch((err) => {
+          handleInfoTooltipContent(
+            "Во время запроса произошла ошибка.", "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+          );
+          handleInfoTooltipPopupOpen();
+          console.log(err);
+        })
+        .finally(() => setIsLoading(false))
+    }
+  }, [loggedIn]);
+
+  //поиск по сохраненным фильмам
   function getMoviesSaveCardList(searchFilm, isShort) {
+    const films = JSON.parse(localStorage.getItem('save-movies'));
+
     if (searchFilm === "") {
       handleInfoTooltipContent("Нужно ввести ключевое слово");
       handleInfoTooltipPopupOpen();
-      setCardList([]);
-      localStorage.setItem("save-movies", JSON.stringify([]));
+      setSavedCardList(films);
       return;
     }
     setIsLoading(true);
+
     MainApi
     .getSavedMovies()
       .then((films) =>{
@@ -224,7 +248,7 @@ function App() {
             return film.duration <= 40 && filterRegexFilm.test(film.nameRU)
           }
         })
-        setCardList(filteredFilms);
+        setSavedCardList(filteredFilms);
         if (filteredFilms.length === 0) {
           handleInfoTooltipContent("Ничего не найдено");
           handleInfoTooltipPopupOpen();
@@ -250,7 +274,7 @@ function App() {
     }
   }, [loggedIn])
 
-  //сохранить фильм в сохранённые фильмы
+  //добавить фильм в сохранённые фильмы
   function handleSaveFilm(film) {
     MainApi
     .addSaveFilm(film)
