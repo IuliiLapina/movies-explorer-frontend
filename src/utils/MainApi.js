@@ -48,6 +48,7 @@ class Api {
     return fetch(`${this._address}/movies`, {
       method:'POST',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         country: film.country,
         director: film.director,
@@ -61,6 +62,15 @@ class Api {
         nameRU: film.nameRU,
         nameEN: film.nameEN,
       })
+    })
+      .then(this._checkResponse);
+  }
+
+  deleteSaveFilm(movieId) {
+    return fetch(`${this._address}/movies/${movieId}`, {
+      method:'DELETE',
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse);
   }
