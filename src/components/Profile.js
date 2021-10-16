@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormWithValidation } from "../utils/formValidator";
 import CurrentUserContext from "../contexts/CurrentUserContext";
+import Preloader from './Preloader';
 
-function Profile ({handleExit, onUpdateUserInfo}) {
+function Profile ({handleExit, onUpdateUserInfo, isLoading}) {
   const currentUser = React.useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, setIsValid } = useFormWithValidation();
 
@@ -25,6 +26,7 @@ function Profile ({handleExit, onUpdateUserInfo}) {
 
   return (
     <section className="profile">
+      {isLoading ? <Preloader/> : (
       <div className="popup__container popup__container_profile">
         <h2 className="popup__title popup__title_profile">Привет, {currentUser.name}!</h2>
         <form className="popup__form popup__form_profile" name="form-register" onSubmit={handleSubmit} noValidate>
@@ -41,7 +43,7 @@ function Profile ({handleExit, onUpdateUserInfo}) {
               type="text"
               placeholder={currentUser.name}
               name="name"
-              pattern='^[A-Za-zА-Яа-я\s]{-}$'
+              pattern='^[A-Za-zА-Яа-я\s]$'
               minLength="2"
               maxLength="30"
               value={ values["name"] }
@@ -96,6 +98,7 @@ function Profile ({handleExit, onUpdateUserInfo}) {
           <Link className="profile__link" to="/" onClick={handleExit}>Выйти из аккаунта</Link>
         </form>
       </div>
+      )}
     </section>
   );
 }

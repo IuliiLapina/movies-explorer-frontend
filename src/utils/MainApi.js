@@ -57,7 +57,7 @@ class Api {
         description: film.description,
         image: `https://api.nomoreparties.co${film.image.url}`,
         trailer: film.trailerLink,
-        thumbnail: `https://api.nomoreparties.co${film.image.formats.thumbnail.url}`,
+        thumbnail: `https://api.nomoreparties.co${film.image.url}`,
         movieId: film.id,
         nameRU: film.nameRU,
         nameEN: film.nameEN,

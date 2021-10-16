@@ -103,9 +103,10 @@ function App() {
         if (res) {
           localStorage.setItem("token", res.token);
           setCurrentUser(res);
-          console.log("авторизация" + res.email);
-
+          localStorage.removeItem("movies");
+          localStorage.removeItem("save-movies");
           setLoggedIn(true);
+          setCurrentUser(res);
           history.push("/movies");
         }
       })
@@ -142,18 +143,18 @@ function App() {
     setLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("movies");
-    setCurrentUser({
-      name: "", email: ""
-    });
+    localStorage.removeItem("save-movies");
+    setCurrentUser('');
+    setCardList([]);
     history.push("/");
   }
 
   //обновление данных пользователя
   function onUpdateUserInfo(email, name) {
+    setIsLoading(true);
     MainApi.setUserData(email, name)
       .then((res) => {
         setCurrentUser(res);
-        console.log(res);
         handleInfoTooltipContent("Изменения сохранены.");
         handleInfoTooltipPopupOpen();
       })
@@ -164,7 +165,8 @@ function App() {
         );
         handleInfoTooltipPopupOpen();
         console.log(err);
-      });
+      })
+      .finally(() => setIsLoading(false))
   }
 
   //получить фильмы с стороннего api по поисковому запросу
@@ -211,7 +213,7 @@ function App() {
       MainApi
       .getSavedMovies()
         .then((films) =>{
-          localStorage.setItem('save-movies', JSON.stringify(films));
+          localStorage.setItem("save-movies", JSON.stringify(films));
           setSavedCardList(films);
         })
         .catch((err) => {
@@ -236,6 +238,7 @@ function App() {
       return;
     }
     setIsLoading(true);
+    console.log(films)
 
     MainApi
     .getSavedMovies()
@@ -292,6 +295,34 @@ function App() {
       });
   }
 
+  //проверить наличие лайка
+  function checkLikeFilm(movie) {
+    return savedCardList.some((film) => film.movieId === movie.id);
+  }
+
+  function toggleFilmLike(film, isLiked) {
+    isLiked ? handleDeleteFilm(film) : handleSaveFilm(film);
+  }
+
+  //удалить фильм из сохраненных
+  function handleDeleteFilm(film) {
+    const movieId = savedCardList.find((f) => f.movieId === film.id)._id;
+    console.log(movieId);
+    MainApi
+    .deleteSaveFilm(movieId)
+    .then(() => {
+      setSavedCardList(savedCardList.filter((f) => f._id !== movieId));
+    })
+    .catch((err) => {
+      handleInfoTooltipContent(
+        "Что-то пошло не так!",
+        "Попробуйте ещё раз. " + err
+      );
+      handleInfoTooltipPopupOpen();
+      console.log(err);
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -307,10 +338,11 @@ function App() {
             path="/movies"
             loggedIn={loggedIn}
             component={Movies}
-            handleSaveFilm={handleSaveFilm}
             films={cardList}
             getMoviesCardList={getMoviesCardList}
             isLoading={isLoading}
+            checkLikeFilm={checkLikeFilm}
+            toggleFilmLike={toggleFilmLike}
           />
           <ProtectedRoute
             exact
@@ -320,10 +352,13 @@ function App() {
             films={savedCardList}
             getMoviesCardList={getMoviesSaveCardList}
             isLoading={isLoading}
+            checkLikeFilm={checkLikeFilm}
+            toggleFilmLike={toggleFilmLike}
           />
           <ProtectedRoute
             exact
             path="/profile"
+            isLoading={isLoading}
             loggedIn={loggedIn}
             component={Profile}
             onUpdateUserInfo={onUpdateUserInfo}

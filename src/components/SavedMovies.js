@@ -1,9 +1,15 @@
 import React from "react";
-import Preloader from './Preloader';
-import SearchForm from './SearchForm';
-import MoviesCardList from './MoviesCardList';
+import Preloader from "./Preloader";
+import SearchForm from "./SearchForm";
+import MoviesCardList from "./MoviesCardList";
 
-function Movies ({films, getMoviesCardList, isLoading}) {
+function SavedMovies({
+  films,
+  getMoviesCardList,
+  isLoading,
+  checkLikeFilm,
+  toggleFilmLike
+}) {
   const [searchFilm, setSearchFilm] = React.useState("");
   const [isShortFilm, setIsShortFilm] = React.useState("false");
 
@@ -19,9 +25,17 @@ function Movies ({films, getMoviesCardList, isLoading}) {
         setSearchFilm={setSearchFilm}
         setIsShortFilm={setIsShortFilm}
       />
-      {isLoading ? <Preloader /> : <MoviesCardList films={films} />}
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          films={films}
+          checkLikeFilm={checkLikeFilm}
+          toggleFilmLike={toggleFilmLike}
+        />
+      )}
     </main>
   );
 }
 
-export default Movies;
+export default SavedMovies;

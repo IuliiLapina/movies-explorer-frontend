@@ -2,7 +2,11 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import MoviesCard from "./MoviesCard";
 
-function MoviesCardList({ films, handleSaveFilm }) {
+function MoviesCardList({
+  films,
+  checkLikeFilm,
+  toggleFilmLike
+}) {
   const location = useLocation();
   const windowWidtn = window.innerWidth;
   const windowWidtnBig = 1280;
@@ -33,13 +37,26 @@ function MoviesCardList({ films, handleSaveFilm }) {
   return (
     <section className="content-cards">
       <ul className="cards">
-        {films.slice(0, showСards).map((film) => (
-          <MoviesCard
-            film={film}
-            key={film.id}
-            onFilmLike={handleSaveFilm}
-          />
-        ))}
+        {location.pathname === "/movies"
+          ? films
+              .slice(0, showСards)
+              .map((film) => (
+                <MoviesCard
+                  film={film}
+                  key={film.id}
+                  checkLikeFilm={checkLikeFilm}
+                  toggleFilmLike={toggleFilmLike}
+                />
+              ))
+          : films.map((film) => (
+            <MoviesCard
+              film={film}
+              key={film.movieId}
+              checkLikeFilm={checkLikeFilm}
+              toggleFilmLike={toggleFilmLike}
+            />
+          ))
+        }
       </ul>
       {location.pathname === "/movies" ? (
         <div className="cards__more-container">
