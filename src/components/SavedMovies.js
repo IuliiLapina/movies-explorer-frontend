@@ -5,16 +5,17 @@ import MoviesCardList from "./MoviesCardList";
 
 function SavedMovies({
   films,
-  getMoviesCardList,
+  getFilmsSaveCardList,
   isLoading,
   checkLikeFilm,
-  toggleFilmLike
+  toggleFilmLike,
+  handleDeleteFilm
 }) {
   const [searchFilm, setSearchFilm] = React.useState("");
   const [isShortFilm, setIsShortFilm] = React.useState("false");
 
   function onSubmitSearchForm() {
-    getMoviesCardList(searchFilm, isShortFilm);
+    getFilmsSaveCardList(searchFilm, isShortFilm);
   }
 
   return (
@@ -30,8 +31,8 @@ function SavedMovies({
       ) : (
         <MoviesCardList
           films={films}
+          handleDeleteFilm={handleDeleteFilm}
           checkLikeFilm={checkLikeFilm}
-          toggleFilmLike={toggleFilmLike}
         />
       )}
     </main>

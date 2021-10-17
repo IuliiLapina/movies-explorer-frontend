@@ -6,7 +6,7 @@ import Preloader from "./Preloader";
 
 function Movies({
   films,
-  getMoviesCardList,
+  getFilmsCardList,
   isLoading,
   checkLikeFilm,
   toggleFilmLike
@@ -15,7 +15,7 @@ function Movies({
   const [isShortFilm, setIsShortFilm] = React.useState("false");
 
   function onSubmitSearchForm() {
-    getMoviesCardList(searchFilm, isShortFilm);
+    getFilmsCardList(searchFilm, isShortFilm);
   }
 
   return (

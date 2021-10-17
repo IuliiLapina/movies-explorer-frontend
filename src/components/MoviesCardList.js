@@ -1,31 +1,31 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import MoviesCard from "./MoviesCard";
+import { WINDOW_WIDTH_BIG, WINDOW_WIDTH_MEDIUM } from "../utils/constans";
 
 function MoviesCardList({
   films,
   checkLikeFilm,
-  toggleFilmLike
+  toggleFilmLike,
+  handleDeleteFilm
 }) {
   const location = useLocation();
   const windowWidtn = window.innerWidth;
-  const windowWidtnBig = 1280;
-  const windowWidtnMedium = 768;
 
   const [showСards, setShowСards] = React.useState(
-    windowWidtn >= windowWidtnBig
+    windowWidtn >= WINDOW_WIDTH_BIG
       ? 12
-      : windowWidtn >= windowWidtnMedium
+      : windowWidtn >= WINDOW_WIDTH_MEDIUM
       ? 8
       : 5
   );
   const [stepOfShowingCards, setStepOfShowingCards] = React.useState(
-    windowWidtn >= windowWidtnBig ? 3 : 2
+    windowWidtn >= WINDOW_WIDTH_BIG ? 3 : 2
   );
 
   window.onresize = () => {
     setTimeout(
-      setStepOfShowingCards(windowWidtn > windowWidtnBig ? 3 : 2),
+      setStepOfShowingCards(windowWidtn > WINDOW_WIDTH_BIG ? 3 : 2),
       500
     );
   };
@@ -52,6 +52,7 @@ function MoviesCardList({
             <MoviesCard
               film={film}
               key={film.movieId}
+              handleDeleteFilm={handleDeleteFilm}
               checkLikeFilm={checkLikeFilm}
               toggleFilmLike={toggleFilmLike}
             />

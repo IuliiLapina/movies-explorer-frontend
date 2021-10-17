@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import ProtectedRoute from "../ProtectedRoute";
+import { DURATION_FILM_IS_SHORT } from "../../utils/constans";
 
 import Header from "../Header";
 import Main from "../Main";
@@ -37,12 +38,13 @@ function App() {
 
   //проверка токена
   React.useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem("token");
     if (jwt) {
       auth
         .getContent(jwt)
         .then((res) => {
           setLoggedIn(true);
+          setCurrentUser(res);
           history.push("/movies");
         })
         .catch((err) => console.log(err));
@@ -77,6 +79,7 @@ function App() {
 
   //регистрация пользователя
   function authRegister(name, email, password) {
+    setIsLoading(true);
     auth
       .register(name, email, password)
       .then(() => {
@@ -92,23 +95,25 @@ function App() {
         );
         handleInfoTooltipPopupOpen();
         console.log(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   }
 
   //авторизация пользователя
   function authAuthorize(email, password) {
+    setIsLoading(true);
     auth
       .authorize(email, password)
       .then((res) => {
-        if (res) {
+        if (res.token) {
           localStorage.setItem("token", res.token);
-          setCurrentUser(res);
-          localStorage.removeItem("movies");
-          localStorage.removeItem("save-movies");
-          setLoggedIn(true);
-          setCurrentUser(res);
-          history.push("/movies");
         }
+          localStorage.removeItem("movies");
+          localStorage.removeItem("saveMovies");
+          setLoggedIn(true);
+          setCurrentUser(res.user);
+          history.push("/movies");
+
       })
       .catch((err) => {
         handleInfoTooltipContent(
@@ -117,7 +122,8 @@ function App() {
         );
         handleInfoTooltipPopupOpen();
         console.log(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   }
 
   function checkToken() {
@@ -143,9 +149,10 @@ function App() {
     setLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("movies");
-    localStorage.removeItem("save-movies");
-    setCurrentUser('');
+    localStorage.removeItem("saveMovies");
+    setCurrentUser({});
     setCardList([]);
+    setSavedCardList([]);
     history.push("/");
   }
 
@@ -166,11 +173,11 @@ function App() {
         handleInfoTooltipPopupOpen();
         console.log(err);
       })
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsLoading(false));
   }
 
   //получить фильмы с стороннего api по поисковому запросу
-  function getMoviesCardList(searchFilm, isShort) {
+  function getFilmsCardList(searchFilm, isShort) {
     if (searchFilm === "") {
       handleInfoTooltipContent("Нужно ввести ключевое слово");
       handleInfoTooltipPopupOpen();
@@ -180,15 +187,8 @@ function App() {
     }
     setIsLoading(true);
     getMovies()
-      .then((films) =>{
-        const filteredFilms = films.filter((film) => {
-          const filterRegexFilm = new RegExp(searchFilm, 'ig');
-          if (!isShort) {
-            return filterRegexFilm.test(film.nameRU)
-          } else {
-            return film.duration <= 40 && filterRegexFilm.test(film.nameRU)
-          }
-        })
+      .then((films) => {
+        const filteredFilms = searchFilms(searchFilm, isShort, films);
         setCardList(filteredFilms);
         localStorage.setItem("movies", JSON.stringify(filteredFilms));
         if (filteredFilms.length === 0) {
@@ -198,38 +198,58 @@ function App() {
       })
       .catch((err) => {
         handleInfoTooltipContent(
-          "Во время запроса произошла ошибка.", "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+          "Во время запроса произошла ошибка.",
+          "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
         );
         handleInfoTooltipPopupOpen();
         console.log(err);
       })
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsLoading(false));
+  }
+
+  function searchFilms(searchFilm, isShort, films) {
+    const filterRegexFilm = new RegExp(searchFilm, "ig");
+    return films.filter((film) => {
+      if (!isShort) {
+        return filterRegexFilm.test(film.nameRU);
+      } else {
+        return (
+          film.duration <= DURATION_FILM_IS_SHORT &&
+          filterRegexFilm.test(film.nameRU)
+        );
+      }
+    });
   }
 
   //получить сохраненные фильмы пользователя
   React.useEffect(() => {
     setIsLoading(true);
     if (loggedIn) {
-      MainApi
-      .getSavedMovies()
-        .then((films) =>{
-          localStorage.setItem("save-movies", JSON.stringify(films));
-          setSavedCardList(films);
+      MainApi.getSavedMovies()
+        .then((res) => {
+      //    const {film} = res;
+        //  console.log(film)
+         // console.log(res.filter((film) => film.owner === currentUser._id))
+
+          localStorage.setItem("saveMovies", JSON.stringify(res));
+          setSavedCardList(res);
+
         })
         .catch((err) => {
           handleInfoTooltipContent(
-            "Во время запроса произошла ошибка.", "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+            "Во время запроса произошла ошибка.",
+            "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
           );
           handleInfoTooltipPopupOpen();
           console.log(err);
         })
-        .finally(() => setIsLoading(false))
+        .finally(() => setIsLoading(false));
     }
   }, [loggedIn]);
 
   //поиск по сохраненным фильмам
-  function getMoviesSaveCardList(searchFilm, isShort) {
-    const films = JSON.parse(localStorage.getItem('save-movies'));
+  function getFilmsSaveCardList(searchFilm, isShort) {
+    const films = JSON.parse(localStorage.getItem("saveMovies"));
 
     if (searchFilm === "") {
       handleInfoTooltipContent("Нужно ввести ключевое слово");
@@ -238,19 +258,11 @@ function App() {
       return;
     }
     setIsLoading(true);
-    console.log(films)
+    console.log(films);
 
-    MainApi
-    .getSavedMovies()
-      .then((films) =>{
-        const filteredFilms = films.filter((film) => {
-          const filterRegexFilm = new RegExp(searchFilm, 'ig');
-          if (!isShort) {
-            return filterRegexFilm.test(film.nameRU)
-          } else {
-            return film.duration <= 40 && filterRegexFilm.test(film.nameRU)
-          }
-        })
+    MainApi.getSavedMovies()
+      .then((films) => {
+        const filteredFilms = searchFilms(searchFilm, isShort, films);
         setSavedCardList(filteredFilms);
         if (filteredFilms.length === 0) {
           handleInfoTooltipContent("Ничего не найдено");
@@ -259,31 +271,34 @@ function App() {
       })
       .catch((err) => {
         handleInfoTooltipContent(
-          "Во время запроса произошла ошибка.", "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+          "Во время запроса произошла ошибка.",
+          "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
         );
         handleInfoTooltipPopupOpen();
         console.log(err);
       })
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsLoading(false));
   }
 
   //получить фильмы из локального хранилища
   React.useEffect(() => {
-    const localStorageMoviesCardList = JSON.parse(localStorage.getItem("movies"));
+    const localStorageCardList = JSON.parse(localStorage.getItem("movies"));
     if (loggedIn) {
-      if (localStorageMoviesCardList) {
-        setCardList(localStorageMoviesCardList);
+      if (localStorageCardList) {
+        setCardList(localStorageCardList);
       }
     }
-  }, [loggedIn])
+  }, [loggedIn]);
 
   //добавить фильм в сохранённые фильмы
   function handleSaveFilm(film) {
-    MainApi
-    .addSaveFilm(film)
+    MainApi.addSaveFilm(film)
       .then((newFilm) => {
-        setSavedCardList([newFilm, ...savedCardList])
-        localStorage.setItem("save-movies", JSON.stringify([newFilm, ...savedCardList]));
+        setSavedCardList([newFilm, ...savedCardList]);
+        localStorage.setItem(
+          "saveMovies",
+          JSON.stringify([newFilm, ...savedCardList])
+        );
       })
       .catch((err) => {
         handleInfoTooltipContent(
@@ -306,21 +321,35 @@ function App() {
 
   //удалить фильм из сохраненных
   function handleDeleteFilm(film) {
-    const movieId = savedCardList.find((f) => f.movieId === film.id)._id;
-    console.log(movieId);
-    MainApi
-    .deleteSaveFilm(movieId)
-    .then(() => {
-      setSavedCardList(savedCardList.filter((f) => f._id !== movieId));
-    })
-    .catch((err) => {
-      handleInfoTooltipContent(
-        "Что-то пошло не так!",
-        "Попробуйте ещё раз. " + err
-      );
-      handleInfoTooltipPopupOpen();
-      console.log(err);
-    });
+    const movieId = savedCardList.find((f) => f.id === film.movieId)._id;
+
+    MainApi.deleteSaveFilm(movieId)
+      .then(() => {
+        setSavedCardList(savedCardList.filter((f) => f._id !== movieId));
+      })
+      .catch((err) => {
+        handleInfoTooltipContent(
+          "Что-то пошло не так!",
+          "Попробуйте ещё раз. " + err
+        );
+        handleInfoTooltipPopupOpen();
+        console.log(err);
+      });
+  }
+
+  function handleDeleteSaveFilm(film) {
+    MainApi.deleteSaveFilm(film._id)
+      .then(() => {
+        setSavedCardList(savedCardList.filter((f) => f._id !== film._id));
+      })
+      .catch((err) => {
+        handleInfoTooltipContent(
+          "Что-то пошло не так!",
+          "Попробуйте ещё раз. " + err
+        );
+        handleInfoTooltipPopupOpen();
+        console.log(err);
+      });
   }
 
   return (
@@ -339,7 +368,7 @@ function App() {
             loggedIn={loggedIn}
             component={Movies}
             films={cardList}
-            getMoviesCardList={getMoviesCardList}
+            getFilmsCardList={getFilmsCardList}
             isLoading={isLoading}
             checkLikeFilm={checkLikeFilm}
             toggleFilmLike={toggleFilmLike}
@@ -350,10 +379,10 @@ function App() {
             loggedIn={loggedIn}
             component={SavedMovies}
             films={savedCardList}
-            getMoviesCardList={getMoviesSaveCardList}
+            getFilmsSaveCardList={getFilmsSaveCardList}
             isLoading={isLoading}
             checkLikeFilm={checkLikeFilm}
-            toggleFilmLike={toggleFilmLike}
+            handleDeleteFilm={handleDeleteSaveFilm}
           />
           <ProtectedRoute
             exact
@@ -367,6 +396,7 @@ function App() {
 
           <Route path="/signup">
             <Register
+              isLoading={isLoading}
               title="Добро пожаловать!"
               buttonText="Зарегистрироваться"
               authRegister={authRegister}
@@ -375,6 +405,7 @@ function App() {
 
           <Route path="/signin">
             <Login
+              isLoading={isLoading}
               title="Рады видеть!"
               buttonText="Войти"
               authAuthorize={authAuthorize}

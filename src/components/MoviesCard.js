@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-function MoviesCard({ film, toggleFilmLike, checkLikeFilm }) {
+function MoviesCard({ film, toggleFilmLike, checkLikeFilm, handleDeleteFilm }) {
   const location = useLocation();
   const isLiked = checkLikeFilm(film);
 
@@ -12,6 +12,11 @@ function MoviesCard({ film, toggleFilmLike, checkLikeFilm }) {
   function handleLikeClick() {
     toggleFilmLike(film, isLiked);
   }
+
+  function handleDeleteFilmClick () {
+    handleDeleteFilm(film)
+  }
+
 
   const duration = film.duration % 60 === 0
     ? `${film.duration / 60} ч`
@@ -43,7 +48,7 @@ function MoviesCard({ film, toggleFilmLike, checkLikeFilm }) {
             <button
               className="card__delete-btn"
               type="button"
-              onClick={handleLikeClick}
+              onClick={handleDeleteFilmClick}
             ></button>
           )}
         </div>

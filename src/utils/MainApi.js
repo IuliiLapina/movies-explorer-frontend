@@ -39,7 +39,6 @@ class Api {
     return fetch(`${this._address}/movies`, {
       method:'GET',
       headers: this._headers,
-      credentials: 'include',
       })
       .then(this._checkResponse);
   }

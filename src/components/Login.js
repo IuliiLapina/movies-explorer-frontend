@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormWithValidation } from "../utils/formValidator";
+import Preloader from './Preloader'
 
-function Login ({title, buttonText, authAuthorize}) {
+function Login ({title, buttonText, authAuthorize, isLoading}) {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   function handleSubmit(e) {
@@ -12,6 +13,8 @@ function Login ({title, buttonText, authAuthorize}) {
 
   return (
     <div className="form-auth">
+      {isLoading ? <Preloader/> : (
+        <>
       <div className="popup__container">
         <h2 className="popup__title">{title}</h2>
         <form className="popup__form" name="form-register" onSubmit={handleSubmit} noValidate>
@@ -77,6 +80,8 @@ function Login ({title, buttonText, authAuthorize}) {
         <p className="form-auth__text">Ещё не зарегистрированы?</p>
         <Link className="form-auth__link" to="/signup">Регистрация</Link>
       </div>
+      </>
+      )}
     </div>
   );
 }
