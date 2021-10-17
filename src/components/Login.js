@@ -13,8 +13,6 @@ function Login ({title, buttonText, authAuthorize, isLoading}) {
 
   return (
     <div className="form-auth">
-      {isLoading ? <Preloader/> : (
-        <>
       <div className="popup__container">
         <h2 className="popup__title">{title}</h2>
         <form className="popup__form" name="form-register" onSubmit={handleSubmit} noValidate>
@@ -80,8 +78,6 @@ function Login ({title, buttonText, authAuthorize, isLoading}) {
         <p className="form-auth__text">Ещё не зарегистрированы?</p>
         <Link className="form-auth__link" to="/signup">Регистрация</Link>
       </div>
-      </>
-      )}
     </div>
   );
 }

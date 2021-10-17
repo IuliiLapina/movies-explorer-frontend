@@ -13,8 +13,6 @@ function Register({ title, buttonText, authRegister, isLoading}) {
 
   return (
     <div className="form-auth">
-      {isLoading ? <Preloader/> : (
-        <>
       <div className="popup__container">
         <h2 className="popup__title">{title}</h2>
         <form
@@ -120,8 +118,6 @@ function Register({ title, buttonText, authRegister, isLoading}) {
           Войти
         </Link>
       </div>
-      </>
-  )}
     </div>
   );
 }

@@ -17,7 +17,6 @@ function MoviesCard({ film, toggleFilmLike, checkLikeFilm, handleDeleteFilm }) {
     handleDeleteFilm(film)
   }
 
-
   const duration = film.duration % 60 === 0
     ? `${film.duration / 60} ч`
     : film.duration > 60
