@@ -43,7 +43,7 @@ function Profile ({handleExit, onUpdateUserInfo, isLoading}) {
               type="text"
               placeholder={currentUser.name}
               name="name"
-              pattern='^[A-Za-zА-Яа-я\s]$'
+              pattern='^[А-Яа-я\s\w\S]{1,}$'
               minLength="2"
               maxLength="30"
               value={ values["name"] }

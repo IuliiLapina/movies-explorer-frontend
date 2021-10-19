@@ -33,7 +33,6 @@ function App() {
 
   const [cardList, setCardList] = React.useState([]);
   const [savedCardList, setSavedCardList] = React.useState([]);
-
   const [isLoading, setIsLoading] = React.useState(false);
 
   //проверка токена
@@ -227,13 +226,9 @@ function App() {
     if (loggedIn) {
       MainApi.getSavedMovies()
         .then((res) => {
-      //    const {film} = res;
-        //  console.log(film)
-         // console.log(res.filter((film) => film.owner === currentUser._id))
-
-          localStorage.setItem("saveMovies", JSON.stringify(res));
-          setSavedCardList(res);
-
+          const savefilm = res.filter((film) => film.owner === currentUser._id)
+          localStorage.setItem("saveMovies", JSON.stringify(savefilm));
+          setSavedCardList(savefilm);
         })
         .catch((err) => {
           handleInfoTooltipContent(
@@ -283,6 +278,7 @@ function App() {
   //получить фильмы из локального хранилища
   React.useEffect(() => {
     const localStorageCardList = JSON.parse(localStorage.getItem("movies"));
+
     if (loggedIn) {
       if (localStorageCardList) {
         setCardList(localStorageCardList);

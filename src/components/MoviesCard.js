@@ -7,6 +7,8 @@ function MoviesCard({ film, toggleFilmLike, checkLikeFilm, handleDeleteFilm }) {
 
   function handleFilmClick() {
     location.pathname === "/movies" ? window.open(film.trailerLink) : window.open(film.trailer)
+    console.log(film)
+
   }
 
   function handleLikeClick() {
