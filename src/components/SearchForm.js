@@ -44,6 +44,7 @@ function SearchForm({ onSubmitSearchForm, searchFilm, setSearchFilm, setIsShortF
           <input
             className="checkbox__input"
             type="checkbox"
+            checked
             onChange={handleChangeChekxbox}
           />
           <div className="checkbox__container"></div>
