@@ -43,7 +43,7 @@ function MoviesCardList({
               .map((film) => (
                 <MoviesCard
                   film={film}
-                  key={film.id}
+                  key={film.movieId}
                   checkLikeFilm={checkLikeFilm}
                   toggleFilmLike={toggleFilmLike}
                 />

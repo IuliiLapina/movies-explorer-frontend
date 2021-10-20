@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useFormWithValidation } from "../utils/formValidator";
-import Preloader from "./Preloader";
 
 function Register({ title, buttonText, authRegister, isLoading}) {
   const { values, handleChange, errors, isValid } = useFormWithValidation();

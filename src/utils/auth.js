@@ -5,6 +5,7 @@ export const register = (name, email, password) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
     },
     body: JSON.stringify({name, email, password})
   })

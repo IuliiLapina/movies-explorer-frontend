@@ -31,8 +31,10 @@ function App() {
   const [subtitleInfoTooltipPopup, setSubtitleInfoTooltipPopup] =
     React.useState("");
 
+  const [allFlms, setAllFlms] = React.useState([]);
   const [cardList, setCardList] = React.useState([]);
   const [savedCardList, setSavedCardList] = React.useState([]);
+
   const [isLoading, setIsLoading] = React.useState(false);
 
   //проверка токена
@@ -107,12 +109,11 @@ function App() {
         if (res.token) {
           localStorage.setItem("token", res.token);
         }
-          localStorage.removeItem("movies");
-          localStorage.removeItem("saveMovies");
-          setLoggedIn(true);
-          setCurrentUser(res.user);
-          history.push("/movies");
-
+        localStorage.removeItem("movies");
+        localStorage.removeItem("saveMovies");
+        setLoggedIn(true);
+        setCurrentUser(res.user);
+        history.push("/movies");
       })
       .catch((err) => {
         handleInfoTooltipContent(
@@ -184,26 +185,57 @@ function App() {
       localStorage.setItem("movies", JSON.stringify([]));
       return;
     }
-    setIsLoading(true);
-    getMovies()
-      .then((films) => {
-        const filteredFilms = searchFilms(searchFilm, isShort, films);
-        setCardList(filteredFilms);
-        localStorage.setItem("movies", JSON.stringify(filteredFilms));
-        if (filteredFilms.length === 0) {
-          handleInfoTooltipContent("Ничего не найдено");
+    const films = JSON.parse(localStorage.getItem("allApiFilms"));
+
+    if (films) {
+      setCardList(searchFilms(searchFilm, isShort, films));
+      localStorage.setItem(
+        "movies",
+        JSON.stringify(searchFilms(searchFilm, isShort, films))
+      );
+    } else {
+      setIsLoading(true);
+      getMovies()
+        .then((films) => {
+          const allApiFilms = films.map((film) => {
+            return {
+              country: film.country ? film.country : "none",
+              director: film.director ? film.director : "none",
+              duration: film.duration ? film.duration : 0,
+              year: film.year ? film.year : 0,
+              description: film.description ? film.description : "none",
+              image: `https://api.nomoreparties.co${film.image.url}`,
+              trailer: film.trailerLink
+                ? film.trailerLink
+                : `https://www.youtube.com/`,
+              nameRU: film.nameRU ? film.nameRU : film.nameEN,
+              nameEN: film.nameEN ? film.nameEN : film.nameRU,
+              thumbnail: `https://api.nomoreparties.co${film.image.formats.thumbnail.url}`,
+              movieId: film.id,
+            };
+          });
+          setAllFlms(allApiFilms);
+          localStorage.setItem("allApiFilms", JSON.stringify(allApiFilms));
+
+          const filteredFilms = searchFilms(searchFilm, isShort, allApiFilms);
+          setCardList(filteredFilms);
+          localStorage.setItem("movies", JSON.stringify(filteredFilms));
+
+          if (filteredFilms.length === 0) {
+            handleInfoTooltipContent("Ничего не найдено");
+            handleInfoTooltipPopupOpen();
+          }
+        })
+        .catch((err) => {
+          handleInfoTooltipContent(
+            "Во время запроса произошла ошибка.",
+            "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+          );
           handleInfoTooltipPopupOpen();
-        }
-      })
-      .catch((err) => {
-        handleInfoTooltipContent(
-          "Во время запроса произошла ошибка.",
-          "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
-        );
-        handleInfoTooltipPopupOpen();
-        console.log(err);
-      })
-      .finally(() => setIsLoading(false));
+          console.log(err);
+        })
+        .finally(() => setIsLoading(false));
+    }
   }
 
   function searchFilms(searchFilm, isShort, films) {
@@ -226,7 +258,7 @@ function App() {
     if (loggedIn) {
       MainApi.getSavedMovies()
         .then((res) => {
-          const savefilm = res.filter((film) => film.owner === currentUser._id)
+          const savefilm = res.filter((film) => film.owner === currentUser._id);
           localStorage.setItem("saveMovies", JSON.stringify(savefilm));
           setSavedCardList(savefilm);
         })
@@ -308,7 +340,7 @@ function App() {
 
   //проверить наличие лайка
   function checkLikeFilm(movie) {
-    return savedCardList.some((film) => film.movieId === movie.id);
+    return savedCardList.some((film) => film.movieId === movie.movieId);
   }
 
   function toggleFilmLike(film, isLiked) {
@@ -317,7 +349,7 @@ function App() {
 
   //удалить фильм из сохраненных
   function handleDeleteFilm(film) {
-    const movieId = savedCardList.find((f) => f.id === film.movieId)._id;
+    const movieId = savedCardList.find((f) => f.movieId === film.movieId)._id;
 
     MainApi.deleteSaveFilm(movieId)
       .then(() => {

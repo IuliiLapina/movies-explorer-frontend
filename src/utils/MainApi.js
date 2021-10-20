@@ -14,35 +14,33 @@ class Api {
   //получить инфо пользователя с сервера
   getUserData() {
     return fetch(`${this._address}/users/me`, {
-      method: 'GET',
+      method: "GET",
       headers: this._headers,
-      credentials: 'include',
-    })
-    .then(this._checkResponse);
+      credentials: "include",
+    }).then(this._checkResponse);
   }
 
   //обновить инфо пользователя на сервере
   setUserData(email, name) {
     return fetch(`${this._address}/users/me`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this._headers,
-      credentials: 'include',
+      credentials: "include",
       body: JSON.stringify({
         email,
-        name
-      })
-    })
-    .then(this._checkResponse);
+        name,
+      }),
+    }).then(this._checkResponse);
   }
 
   getSavedMovies() {
     return fetch(`${this._address}/movies`, {
-      method:'GET',
+      method: "GET",
       headers: this._headers,
-      })
-      .then(this._checkResponse);
+    }).then(this._checkResponse);
   }
 
+  /*
   addSaveFilm(film) {
     return fetch(`${this._address}/movies`, {
       method:'POST',
@@ -64,21 +62,28 @@ class Api {
     })
       .then(this._checkResponse);
   }
-
+*/
+  addSaveFilm(film) {
+    return fetch(`${this._address}/movies`, {
+      method: "POST",
+      headers: this._headers,
+      credentials: "include",
+      body: JSON.stringify(film),
+    }).then(this._checkResponse);
+  }
   deleteSaveFilm(movieId) {
     return fetch(`${this._address}/movies/${movieId}`, {
-      method:'DELETE',
+      method: "DELETE",
       headers: this._headers,
-      credentials: 'include',
-    })
-      .then(this._checkResponse);
+      credentials: "include",
+    }).then(this._checkResponse);
   }
 }
 
 export const MainApi = new Api({
   address: "https://api.best-movies-explorer.nomoredomains.club",
   headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
   },
 });
