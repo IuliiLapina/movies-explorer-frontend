@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";

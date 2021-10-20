@@ -6,7 +6,6 @@ function MoviesCard({ film, toggleFilmLike, checkLikeFilm, handleDeleteFilm }) {
   const isLiked = checkLikeFilm(film);
 
   function handleFilmClick() {
-//    location.pathname === "/movies" ? window.open(film.trailerLink) : window.open(film.trailer)
 window.open(film.trailer)
 
 console.log(film)
@@ -32,7 +31,6 @@ console.log(film)
       <li className="card card_saved">
         <img
           className="card__image"
-//          src={location.pathname === "/movies" ? `https://api.nomoreparties.co${film.image.url}` : film.image}
           src={film.image}
           alt={film.title}
           onClick={handleFilmClick}
