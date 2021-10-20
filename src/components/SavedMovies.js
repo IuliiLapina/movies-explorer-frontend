@@ -12,7 +12,7 @@ function SavedMovies({
   handleDeleteFilm
 }) {
   const [searchFilm, setSearchFilm] = React.useState("");
-  const [isShortFilm, setIsShortFilm] = React.useState("false");
+  const [isShortFilm, setIsShortFilm] = React.useState(false);
 
   function onSubmitSearchForm() {
     getFilmsSaveCardList(searchFilm, isShortFilm);

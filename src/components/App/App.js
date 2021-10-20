@@ -175,11 +175,6 @@ function App() {
           const filteredFilms = searchFilms(searchFilm, isShort, allApiFilms);
           setCardList(filteredFilms);
           localStorage.setItem("movies", JSON.stringify(filteredFilms));
-
-          if (filteredFilms.length === 0) {
-            handleInfoTooltipContent("Ничего не найдено");
-            handleInfoTooltipPopupOpen();
-          }
         })
         .catch((err) => {
           handleInfoTooltipContent(
@@ -195,7 +190,7 @@ function App() {
 
   function searchFilms(searchFilm, isShort, films) {
     const filterRegexFilm = new RegExp(searchFilm, "ig");
-    return films.filter((film) => {
+    const result = films.filter((film) => {
       if (!isShort) {
         return filterRegexFilm.test(film.nameRU);
       } else {
@@ -204,38 +199,28 @@ function App() {
           filterRegexFilm.test(film.nameRU)
         );
       }
-    });
+    })
+    if (result.length === 0) {
+      handleInfoTooltipContent("Ничего не найдено");
+      handleInfoTooltipPopupOpen();
+    }
+    return result;
   }
 
   //поиск по сохраненным фильмам
   function getFilmsSaveCardList(searchFilm, isShort) {
     const films = JSON.parse(localStorage.getItem("saveMovies"));
+    console.log(films);
 
     if (searchFilm === "") {
       handleInfoTooltipContent("Нужно ввести ключевое слово");
       handleInfoTooltipPopupOpen();
       setSavedCardList(films);
-      return;
+    } else {
+      const filteredFilms = searchFilms(searchFilm, isShort, films);
+      setSavedCardList(filteredFilms);
+      console.log(filteredFilms);
     }
-    setIsLoading(true);
-    MainApi.getSavedMovies()
-      .then((films) => {
-        const filteredFilms = searchFilms(searchFilm, isShort, films);
-        setSavedCardList(filteredFilms);
-        if (filteredFilms.length === 0) {
-          handleInfoTooltipContent("Ничего не найдено");
-          handleInfoTooltipPopupOpen();
-        }
-      })
-      .catch((err) => {
-        handleInfoTooltipContent(
-          "Во время запроса произошла ошибка.",
-          "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
-        );
-        handleInfoTooltipPopupOpen();
-        console.log(err);
-      })
-      .finally(() => setIsLoading(false));
   }
 
   //добавить фильм в сохранённые фильмы
@@ -343,11 +328,8 @@ function App() {
     if (loggedIn) {
       MainApi.getSavedMovies()
         .then((res) => {
-          console.log(res);
-          setSavedCardList(res);
-
-          //        const savefilm = res.filter((film) => film.owner === currentUser._id);
           localStorage.setItem("saveMovies", JSON.stringify(res));
+          setSavedCardList(res);
         })
         .catch((err) => {
           handleInfoTooltipContent(
