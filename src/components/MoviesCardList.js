@@ -22,14 +22,14 @@ function MoviesCardList({
   const [stepOfShowingCards, setStepOfShowingCards] = React.useState(
     windowWidtn >= WINDOW_WIDTH_BIG ? 3 : 2
   );
-
+/*
   window.onresize = () => {
     setTimeout(
       setStepOfShowingCards(windowWidtn > WINDOW_WIDTH_BIG ? 3 : 2),
       500
     );
   };
-
+*/
   function handleClickMoreBtn() {
     setShowСards(showСards + stepOfShowingCards);
   }
