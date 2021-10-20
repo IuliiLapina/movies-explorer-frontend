@@ -37,32 +37,6 @@ function App() {
 
   const [isLoading, setIsLoading] = React.useState(false);
 
-  //проверка токена
-  React.useEffect(() => {
-    const jwt = localStorage.getItem("token");
-    if (jwt) {
-      auth
-        .getContent(jwt)
-        .then((res) => {
-          setLoggedIn(true);
-          setCurrentUser(res);
-          history.push("/movies");
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [history]);
-
-  React.useEffect(() => {
-    if (loggedIn) {
-      history.push("/movies");
-      MainApi.getUserData()
-        .then((userData) => {
-          setCurrentUser(userData);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [history, loggedIn]);
-
   //Обработчики открытия попапов
   function handleInfoTooltipPopupOpen() {
     setInfoTooltipPopupOpen(true);
@@ -126,33 +100,14 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
-  function checkToken() {
-    const token = localStorage.getItem("token");
-    if (token) {
-      auth
-        .getContent(token)
-        .then((res) => {
-          setLoggedIn(true);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
-  }
-
-  React.useEffect(() => {
-    checkToken();
-  });
-
   //выход из профиля
   function handleExit() {
     setLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("movies");
     localStorage.removeItem("saveMovies");
-    setCurrentUser({});
+    setCurrentUser({ name: "", email: "" });
     setCardList([]);
-    setSavedCardList([]);
     history.push("/");
   }
 
@@ -252,28 +207,6 @@ function App() {
     });
   }
 
-  //получить сохраненные фильмы пользователя
-  React.useEffect(() => {
-    setIsLoading(true);
-    if (loggedIn) {
-      MainApi.getSavedMovies()
-        .then((res) => {
-          const savefilm = res.filter((film) => film.owner === currentUser._id);
-          localStorage.setItem("saveMovies", JSON.stringify(savefilm));
-          setSavedCardList(savefilm);
-        })
-        .catch((err) => {
-          handleInfoTooltipContent(
-            "Во время запроса произошла ошибка.",
-            "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
-          );
-          handleInfoTooltipPopupOpen();
-          console.log(err);
-        })
-        .finally(() => setIsLoading(false));
-    }
-  }, [loggedIn]);
-
   //поиск по сохраненным фильмам
   function getFilmsSaveCardList(searchFilm, isShort) {
     const films = JSON.parse(localStorage.getItem("saveMovies"));
@@ -285,8 +218,6 @@ function App() {
       return;
     }
     setIsLoading(true);
-    console.log(films);
-
     MainApi.getSavedMovies()
       .then((films) => {
         const filteredFilms = searchFilms(searchFilm, isShort, films);
@@ -306,17 +237,6 @@ function App() {
       })
       .finally(() => setIsLoading(false));
   }
-
-  //получить фильмы из локального хранилища
-  React.useEffect(() => {
-    const localStorageCardList = JSON.parse(localStorage.getItem("movies"));
-
-    if (loggedIn) {
-      if (localStorageCardList) {
-        setCardList(localStorageCardList);
-      }
-    }
-  }, [loggedIn]);
 
   //добавить фильм в сохранённые фильмы
   function handleSaveFilm(film) {
@@ -379,6 +299,67 @@ function App() {
         console.log(err);
       });
   }
+
+  //проверка токена
+  React.useEffect(() => {
+    const jwt = localStorage.getItem("token");
+    if (jwt) {
+      auth
+        .getContent(jwt)
+        .then((res) => {
+          setLoggedIn(true);
+          setCurrentUser(res);
+          history.push("/movies");
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [history]);
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      history.push("/movies");
+      MainApi.getUserData()
+        .then((userData) => {
+          setCurrentUser(userData);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [history, loggedIn]);
+
+  //получить фильмы из локального хранилища
+  React.useEffect(() => {
+    const localStorageCardList = JSON.parse(localStorage.getItem("movies"));
+
+    if (loggedIn) {
+      if (localStorageCardList) {
+        setCardList(localStorageCardList);
+      }
+    }
+  }, [loggedIn]);
+
+  //получить сохраненные фильмы пользователя
+  React.useEffect(() => {
+    setIsLoading(true);
+    if (loggedIn) {
+      MainApi.getSavedMovies()
+        .then((res) => {
+          console.log(res);
+          setSavedCardList(res);
+
+          //        const savefilm = res.filter((film) => film.owner === currentUser._id);
+          localStorage.setItem("saveMovies", JSON.stringify(res));
+        })
+        .catch((err) => {
+          handleInfoTooltipContent(
+            "Во время запроса произошла ошибка.",
+            "Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+          );
+          handleInfoTooltipPopupOpen();
+          console.log(err);
+        })
+        .finally(() => setIsLoading(false));
+    }
+  }, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
