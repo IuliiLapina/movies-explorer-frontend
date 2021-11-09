@@ -12,10 +12,10 @@
   position: absolute;
   content: '';
   top: 1px;
-  left: 16px;
+  left: 1px;
   width: 16px;
   height: 16px;
-  background-color: #2BE080;
+  background-color: #F5F5F5;
   border: 1px solid #FFFFFF;
   border-radius: 50%;
   transition: 0.3s;

@@ -20,19 +20,19 @@ function Navigation({ loggedIn }) {
 
               { windowWidtn <= 768 && location.pathname !== `/` ? (
                 <li className="header__list-item">
-                <Link to="/" className="header__menu-link-item">
+                <Link to="/" className={`header__menu-link-item ${location.pathname === "/" ? `header__menu-link-item_active` : ''}`}>
                   Главная
                 </Link>
               </li>
               ) : ('')}
 
               <li className="header__list-item">
-                <Link to="/movies" className="header__menu-link-item header__menu-link-item_active">
+                <Link to="/movies" className={`header__menu-link-item ${location.pathname === "/movies" ? `header__menu-link-item_active` : ''}`}>
                   Фильмы
                 </Link>
               </li>
               <li className="header__list-item">
-                <Link to="/saved-movies" className="header__menu-link-item">
+                <Link to="/saved-movies" className={`header__menu-link-item ${location.pathname === "/saved-movies" ? `header__menu-link-item_active` : ''}`}>
                   Сохранённые фильмы
                 </Link>
               </li>

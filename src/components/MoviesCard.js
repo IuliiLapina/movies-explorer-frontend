@@ -1,42 +1,62 @@
 import React from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
-function MoviesCard ({card}) {
+function MoviesCard({ film, toggleFilmLike, checkLikeFilm, handleDeleteFilm }) {
   const location = useLocation();
-  const classNameCardBtn = `${location.pathname === `/movies` ? `card__like-btn` : `card__delete-btn`}`;
+  const isLiked = checkLikeFilm(film);
+
+  function handleFilmClick() {
+window.open(film.trailer)
+
+console.log(film)
+
+  }
+
+  function handleLikeClick() {
+    toggleFilmLike(film, isLiked);
+  }
+
+  function handleDeleteFilmClick () {
+    handleDeleteFilm(film)
+  }
+
+  const duration = film.duration % 60 === 0
+    ? `${film.duration / 60} ч`
+    : film.duration > 60
+    ? `${Math.floor(film.duration / 60)} ч ${film.duration % 60} мин`
+    : `${film.duration} мин`
 
   return (
     <>
-    <li className="card card_saved">
-      <img className="card__image" src={card.link} alt={card.title}/>
-      <div className="card__description">
-        <h2 className="card__title">{card.title}</h2>
-        <p className="card__duration">{card.duration}</p>
-        <button className={classNameCardBtn} type="button"></button>
-      </div>
-    </li>
-  </>
+      <li className="card card_saved">
+        <img
+          className="card__image"
+          src={film.image}
+          alt={film.title}
+          onClick={handleFilmClick}
+        />
+        <div className="card__description">
+          <h2 className="card__title">{film.nameRU}</h2>
+          <p className="card__duration">
+            {duration}
+          </p>
+          {location.pathname === "/movies" ? (
+            <button
+              className={`card__like-btn ${isLiked && "card__like-btn_active"}`}
+              type="button"
+              onClick={handleLikeClick}
+            ></button>
+          ) : (
+            <button
+              className="card__delete-btn"
+              type="button"
+              onClick={handleDeleteFilmClick}
+            ></button>
+          )}
+        </div>
+      </li>
+    </>
   );
 }
 
 export default MoviesCard;
-
-/*
-function MoviesCard ({card}) {
-  return (
-    <li className="card">
-      <img
-        className="card__image"
-        src={card.link}
-        alt={card.name}
-      />
-      <div className="card__description">
-        <h2 className="card__title">{card.name}</h2>
-        <div className="card__like-container">
-          <p className="card__like-quantity">{card.likes.length}</p>
-        </div>
-      </div>
-    </li>
-  );
-}
-*/
