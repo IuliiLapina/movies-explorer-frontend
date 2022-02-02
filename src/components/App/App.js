@@ -109,6 +109,7 @@ function App() {
     localStorage.removeItem("saveMovies");
     setCurrentUser({ name: "", email: "" });
     setCardList([]);
+    setSavedCardList([]);
     history.push("/");
   }
 
